@@ -1,0 +1,101 @@
+{
+  "slug": "vtuber-rigger",
+  "index": "14",
+  "title": {
+    "ru": "VTuber Rigger",
+    "en": "VTuber Rigger"
+  },
+  "status": "prototype",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Два пути, полностью локально (без платных API): **Path A** — 3D-модель (GLB/GLTF/VRM/OBJ) → VRM 1.0; **Path B** — скриншоты спереди/сбоку/сзади → VRM 1.0. Сегментация тела на K-Means + кривизне, предиктор 53-костного VRM-скелета, скин-веса RBF + Laplacian, 17 выражений, spring-bones для волос/одежды, QA-гейты headless-VRM и LPIPS/CLIP.",
+    "en": "Two paths, fully local (no paid APIs): **Path A** — a 3D model (GLB/GLTF/VRM/OBJ) → VRM 1.0; **Path B** — front/side/back screenshots → VRM 1.0. K-Means + curvature body segmentation, a 53-bone VRM skeleton predictor, RBF + Laplacian skin weights, 17 expressions, springs for hair/clothing, plus headless-VRM and LPIPS/CLIP perceptual QA gates."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "узлов в скелете",
+        "en": "skeleton nodes"
+      },
+      "value": "54",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "мешей",
+        "en": "meshes"
+      },
+      "value": "1",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "выражений",
+        "en": "expressions"
+      },
+      "value": "17",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "костей предиктора",
+        "en": "predicted bones"
+      },
+      "value": "53",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "Python · trimesh · pygltflib · numpy / scipy / scikit-learn · OpenCV · pytest (unit + integration + property + perceptual)",
+  "link": "https://github.com/kukhtik/RIGGER",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Риггинг VTuber-аватара — скелет, скин-веса, выражения, spring-bones — занимает часы ручной работы в Blender, а реконструкция из плоского изображения (скриншоты) сложнее вдвойне."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Два пути, полностью локально (без платных API): **Path A** — 3D-модель (GLB/GLTF/VRM/OBJ) → VRM 1.0; **Path B** — скриншоты спереди/сбоку/сзади → VRM 1.0. Сегментация тела на K-Means + кривизне, предиктор 53-костного VRM-скелета, скин-веса RBF + Laplacian, 17 выражений, spring-bones для волос/одежды, QA-гейты headless-VRM и LPIPS/CLIP."
+      },
+      {
+        "t": "p",
+        "v": "Референсный прогон на тестовой меш-модели: `GLB → VRM`, exit 0, **54 узла, 1 меш, расширения `VRMC_vrm` + `VRMC_springBone`**."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** Rigging a VTuber avatar — skeleton, skin weights, expressions, spring bones — takes hours of manual work in Blender, and screenshot-based reconstruction from a flat image is harder still."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** Two paths, fully local (no paid APIs): **Path A** — a 3D model (GLB/GLTF/VRM/OBJ) → VRM 1.0; **Path B** — front/side/back screenshots → VRM 1.0. K-Means + curvature body segmentation, a 53-bone VRM skeleton predictor, RBF + Laplacian skin weights, 17 expressions, springs for hair/clothing, plus headless-VRM and LPIPS/CLIP perceptual QA gates."
+      },
+      {
+        "t": "p",
+        "v": "Reference run on a test mesh: `GLB → VRM`, exit 0, **54 nodes, 1 mesh, extensions `VRMC_vrm` + `VRMC_springBone`**."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Два пути, полностью локально, без платных API: 3D-модель → VRM 1.0 и скриншоты → VRM 1.0.",
+      "Сегментация тела на K-Means и кривизне.",
+      "Предиктор 53-костного VRM-скелета, скин-веса RBF + Laplacian, 17 выражений.",
+      "Spring-bones для волос и одежды.",
+      "QA-гейты headless-VRM и LPIPS/CLIP."
+    ],
+    "en": [
+      "Two paths, fully local, no paid APIs: a 3D model → VRM 1.0 and screenshots → VRM 1.0.",
+      "Body segmentation with K-Means and curvature.",
+      "A 53-bone VRM skeleton predictor, RBF + Laplacian skin weights, 17 expressions.",
+      "Spring bones for hair and clothing.",
+      "QA gates: headless VRM and LPIPS/CLIP."
+    ]
+  }
+}

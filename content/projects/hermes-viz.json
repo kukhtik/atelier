@@ -1,0 +1,91 @@
+{
+  "slug": "hermes-viz",
+  "index": "04",
+  "title": {
+    "ru": "Hermes Viz",
+    "en": "Hermes Viz"
+  },
+  "status": "rnd",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Один экран с тремя фасетами поверх **живых данных**: **OPS** — радиальный «ролодекс» живой команды (статус, модель, текущий инструмент, активность); **PIPELINE** — доска задач с зависимостями, прогонами и блокировками; **KNOWLEDGE** — граф репозитория (2 292 узла, 839 рёбер) с потоком ретривала.",
+    "en": "One screen with three facets over **live data**: **OPS** — radial deck of the live team (status, model, current tool, activity); **PIPELINE** — task board with dependencies, runs and blocked states; **KNOWLEDGE** — repository graph (2,292 nodes, 839 edges) with retrieval flow."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "агентов в ферме",
+        "en": "agents in farm"
+      },
+      "value": "21",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "моделей",
+        "en": "models"
+      },
+      "value": "9",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "узлов графа",
+        "en": "graph nodes"
+      },
+      "value": "2 292",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "рёбер графа",
+        "en": "graph edges"
+      },
+      "value": "839",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "JavaScript (canvas-консоль) · WebSocket-поток событий · SQLite (канбан-БД) · семантический граф",
+  "link": "https://github.com/kukhtik/Open_space",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Мультиагентная ферма (21 агент, 9 моделей, асинхронная доска задач) непрозрачна с одного взгляда: кто что делает, где задача встала, что реально отдаёт база знаний."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Один экран с тремя фасетами поверх **живых данных**: **OPS** — радиальный «ролодекс» живой команды (статус, модель, текущий инструмент, активность); **PIPELINE** — доска задач с зависимостями, прогонами и блокировками; **KNOWLEDGE** — граф репозитория (2 292 узла, 839 рёбер) с потоком ретривала."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** A multi-agent farm (21 agents, 9 models, async task board) is opaque at a glance: which agent is doing what, where a task is stuck, what the knowledge base actually serves."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** One screen with three facets over **live data**: **OPS** — radial deck of the live team (status, model, current tool, activity); **PIPELINE** — task board with dependencies, runs and blocked states; **KNOWLEDGE** — repository graph (2,292 nodes, 839 edges) with retrieval flow."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Один экран с тремя фасетами поверх **живых данных**.",
+      "**OPS** — радиальный «ролодекс» живой команды: статус, модель, текущий инструмент, активность.",
+      "**PIPELINE** — доска задач с зависимостями, прогонами и блокировками.",
+      "**KNOWLEDGE** — граф репозитория с потоком ретривала."
+    ],
+    "en": [
+      "One screen with three facets over **live data**.",
+      "**OPS** — radial deck of the live team: status, model, current tool, activity.",
+      "**PIPELINE** — task board with dependencies, runs and blocked states.",
+      "**KNOWLEDGE** — repository graph with retrieval flow."
+    ]
+  }
+}

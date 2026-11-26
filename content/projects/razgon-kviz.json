@@ -1,0 +1,131 @@
+{
+  "slug": "razgon-kviz",
+  "index": "07",
+  "title": {
+    "ru": "Разгон Квиз",
+    "en": "Razgon Quiz"
+  },
+  "status": "production",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Состоянием и счётом владеет один сервер. Зал открывается по ссылке с токеном (обычный адрес игры не даёт права управлять показом), один клик разблокирует `AudioContext` браузера, а ведущий листает вопросы с клавиши, пока «фитиль времени» каждого вопроса отсчитывается сам. Поскольку зал отвечает **на бумаге**, а печатает только ведущий, серверу не нужно держать сотни соединений игроков — площадка работает и на слабом канале.",
+    "en": "A single server owns the state and the score. The hall screen opens by a tokenised link (a plain game URL cannot control the show), one click unlocks the browser's `AudioContext`, and the host pages through questions with a keypress while each question's \"fuse\" timer runs itself. Because the hall answers **on paper** and only the host types, the server never has to hold hundreds of player sockets — the venue keeps working on a poor connection."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "тестов backend",
+        "en": "backend tests"
+      },
+      "value": "320",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "тестов frontend",
+        "en": "frontend tests"
+      },
+      "value": "161",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "e2e-спеков",
+        "en": "e2e specs"
+      },
+      "value": "89",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "маршрутов API",
+        "en": "API routes"
+      },
+      "value": "123",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "миграций SQL",
+        "en": "SQL migrations"
+      },
+      "value": "14",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "записей в прекеше",
+        "en": "precache entries"
+      },
+      "value": "386",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "mp3 закэшировано",
+        "en": "mp3 precached"
+      },
+      "value": "98",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "Node 20+ · Fastify 5 · Prisma 6 · PostgreSQL 17 · WebSocket-релей · TypeScript 5 · Vite 6 · PWA (offline-first) · Docker Compose",
+  "link": "https://github.com/kukhtik/Open_space",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Квиз-вечер — это живое шоу: проектор в зале, ведущий управляет с телефона, команды отвечают, а табло со счётом должно быть верным перед платящей публикой. Готовые квиз-приложения предполагают, что у каждого игрока стабильный интернет и что ведущий поправит счёт руками — ни то, ни другое не выживает на реальной площадке с плохим Wi-Fi."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Состоянием и счётом владеет один сервер. Зал открывается по ссылке с токеном (обычный адрес игры не даёт права управлять показом), один клик разблокирует `AudioContext` браузера, а ведущий листает вопросы с клавиши, пока «фитиль времени» каждого вопроса отсчитывается сам. Поскольку зал отвечает **на бумаге**, а печатает только ведущий, серверу не нужно держать сотни соединений игроков — площадка работает и на слабом канале. Фронт — **PWA с явным предкэшем (386 записей)**; каждый из 98 mp3 закэширован поимённо, потому что пропущенный трек — это тишина без ошибки."
+      },
+      {
+        "t": "p",
+        "v": "**Объём.** 123 API-маршрута · 14 SQL-миграций с CHECK-ограничениями · **320 тестов backend**, **161 тест frontend**, **89 жёстких e2e-спеков** (все зелёные) · RBAC (владелец / админ / городской менеджер / ведущий / диджей) · CRM игроков и команд · онлайн-игра с телефона."
+      },
+      {
+        "t": "p",
+        "v": "**Проверки, которые не дают «зеленеть вхолостую».** `fresh-install-check.sh` ищет миграции **рекурсивно** и падает, если не нашёл ни одной — пустой список означает «проверять нечего», а не «всё хорошо». `check-stand-fresh.sh` сверяет время коммита с метками стенда, чтобы e2e не гонялся против устаревшей сборки. Миграции на стенде идемпотентны (учёт в `stand_migrations`): повторный прогон даёт 0 операторов и 0 ошибок."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** A quiz night is a live show: a projector in the hall, a host steering from a phone, teams answering, and a scoreboard that must be right in front of a paying audience. Off-the-shelf quiz apps assume every player has a stable connection and that the host can fix the score by hand — neither survives a real venue with bad Wi-Fi."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** A single server owns the state and the score. The hall screen opens by a tokenised link (a plain game URL cannot control the show), one click unlocks the browser's `AudioContext`, and the host pages through questions with a keypress while each question's \"fuse\" timer runs itself. Because the hall answers **on paper** and only the host types, the server never has to hold hundreds of player sockets — the venue keeps working on a poor connection. The front end is a **PWA with explicit precache (386 entries)**; every one of the 98 mp3 cues is cached by name, because a missed track is silence without an error."
+      },
+      {
+        "t": "p",
+        "v": "**Scope.** 123 API routes · 14 SQL migrations with CHECK constraints · **320 backend tests**, **161 frontend tests**, **89 hard e2e specs** (all green) · RBAC (owner / admin / city manager / host / DJ) · CRM for players and teams · online game from a phone."
+      },
+      {
+        "t": "p",
+        "v": "**Checks that refuse to pass vacuously.** `fresh-install-check.sh` searches migrations **recursively** and fails when it finds none — an empty checklist means \"nothing to check\", not \"all good\". `check-stand-fresh.sh` compares commit time with stand timestamps so e2e never runs against a stale build. Stand migrations are idempotent (tracked in `stand_migrations`): a re-run yields 0 statements and 0 errors."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Состоянием и счётом владеет один сервер.",
+      "Зал открывается по ссылке с токеном; один клик разблокирует `AudioContext`, ведущий листает вопросы с клавиши.",
+      "Зал отвечает **на бумаге**, печатает только ведущий — серверу не нужно держать сотни соединений игроков.",
+      "Фронт — PWA с явным предкэшем: 386 записей и 98 mp3, закэшированных поимённо."
+    ],
+    "en": [
+      "A single server owns the state and the score.",
+      "The hall opens by a tokenised link; one click unlocks `AudioContext`, and the host pages through questions with a keypress.",
+      "The hall answers **on paper** and only the host types, so the server never holds hundreds of player sockets.",
+      "The front end is a PWA with explicit precache: 386 entries and 98 mp3 cues cached by name."
+    ]
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "slug": "trading-stand",
+  "index": "12",
+  "title": {
+    "ru": "Торговый исследовательский стенд",
+    "en": "Trading Research Stand"
+  },
+  "status": "rnd",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Исследовательский стенд, а не сигнальный бот: walk-forward бэктесты с комиссиями, слиппеджем и фандингом; явные проверки look-ahead bias (сдвиг сигналов на бар); CPCV-консистентность (combinatorial purged CV); риск-контроль (сайзинг, circuit breaker, kill-switch). Paper-режим работает без ключей.",
+    "en": "A research bench rather than a signal bot: walk-forward backtests with fees, slippage and funding; explicit look-ahead-bias checks (signals shifted one bar); CPCV (combinatorial purged CV) consistency; risk controls (position sizing, circuit breaker, kill-switch). Paper mode runs without keys."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "стратегий в свипе",
+        "en": "strategies swept"
+      },
+      "value": "33",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "PF на 4h",
+        "en": "PF on 4h"
+      },
+      "value": "1.44",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "сделок",
+        "en": "trades"
+      },
+      "value": "2 526",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "CPCV-консистентность",
+        "en": "CPCV consistency"
+      },
+      "value": "82%",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "breakout за год",
+        "en": "breakout over the year"
+      },
+      "value": "+6.4%",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "buy & hold за год",
+        "en": "buy & hold over the year"
+      },
+      "value": "−52.7%",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "Python · CCXT · pandas / Parquet · FastAPI + Jinja2 web UI · systemd-юниты",
+  "link": "https://github.com/kukhtik/Open_space",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Большинство «прибыльных» розничных стратегий умирают после комиссий и слиппеджа; обычный бэктест это как раз и скрывает."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Исследовательский стенд, а не сигнальный бот: walk-forward бэктесты с комиссиями, слиппеджем и фандингом; явные проверки look-ahead bias (сдвиг сигналов на бар); CPCV-консистентность (combinatorial purged CV); риск-контроль (сайзинг, circuit breaker, kill-switch). Paper-режим работает без ключей."
+      },
+      {
+        "t": "p",
+        "v": "**Измеренный свип** — 33 стратегии на 4 таймфреймах: выше порога PF > 1.1, p < 0.10 и ≥ 30 сделок остаются единицы. Пример на 4h: **PF 1.44, 2 526 сделок, CPCV-консистентность 82%**. Сравнение за тот же год: breakout +6.4% против buy & hold **−52.7%** — активное управление защитило капитал микросчёта."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** Most \"profitable\" retail strategies die after fees and slippage; the standard backtest hides exactly that."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** A research bench rather than a signal bot: walk-forward backtests with fees, slippage and funding; explicit look-ahead-bias checks (signals shifted one bar); CPCV (combinatorial purged CV) consistency; risk controls (position sizing, circuit breaker, kill-switch). Paper mode runs without keys."
+      },
+      {
+        "t": "p",
+        "v": "**Measured sweep** — 33 strategies across 4 timeframes: only a handful stay above PF > 1.1 with p < 0.10 and ≥ 30 trades. E.g. one 4h strategy: **PF 1.44, 2,526 trades, CPCV consistency 82%**. Same-year comparison: breakout +6.4% vs buy & hold **−52.7%** — active risk management protected the capital of a micro-account."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Исследовательский стенд, а не сигнальный бот.",
+      "Walk-forward бэктесты с комиссиями, слиппеджем и фандингом.",
+      "Явные проверки look-ahead bias: сдвиг сигналов на бар.",
+      "CPCV-консистентность и риск-контроль: сайзинг, circuit breaker, kill-switch.",
+      "Paper-режим работает без ключей."
+    ],
+    "en": [
+      "A research bench rather than a signal bot.",
+      "Walk-forward backtests with fees, slippage and funding.",
+      "Explicit look-ahead-bias checks: signals shifted one bar.",
+      "CPCV consistency and risk controls: sizing, circuit breaker, kill-switch.",
+      "Paper mode runs without keys."
+    ]
+  }
+}

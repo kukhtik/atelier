@@ -1,0 +1,151 @@
+{
+  "slug": "streaming-prediction",
+  "index": "10",
+  "title": {
+    "ru": "Streaming stateful prediction",
+    "en": "Streaming Stateful Prediction"
+  },
+  "status": "rnd",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Stateful-рекуррентная модель (GRU, пошаговый экспорт в ONNX) со строгим контрактом состояния: инференс по одной строке, hidden state переносится между вызовами. Ключевое — **метрико-выровненный лосс**: реализация официального блочного агрегата на torch, побитово сверенная со скорером, и корреляция, накапливаемая по всей последовательности (а не по короткому окну, где цель почти постоянна и сигнал тонет в шуме).",
+    "en": "A stateful recurrent model (GRU, step-by-step ONNX export) with a strict state contract: single-row inference, hidden state carried between calls. The key is a **metric-aligned loss** — the official block-wise aggregate reimplemented in torch and verified against the scorer, with correlation accumulated over the whole sequence (not a short window where the target is near-constant and the signal drowns)."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "ускорение инференса",
+        "en": "inference headroom"
+      },
+      "value": "1.38×",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "горизонт корреляции",
+        "en": "correlation horizon"
+      },
+      "value": "4–5×",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "PyTorch · ONNX Runtime · parquet · Linux / WSL · posix_fadvise(DONTNEED)",
+  "link": "https://github.com/kukhtik/Open_space",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Модель должна предсказывать цель по одной строке за раз в потоке: каждая строка зависит от всей предыдущей истории, окно — десятки тысяч строк, а метрика считается блоками внутри последовательности (корреляция, а не MSE). Обычные рецепты (нарезка окнами, MSE-лосс) здесь не работают."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Stateful-рекуррентная модель (GRU, пошаговый экспорт в ONNX) со строгим контрактом состояния: инференс по одной строке, hidden state переносится между вызовами. Ключевое — **метрико-выровненный лосс**: реализация официального блочного агрегата на torch, побитово сверенная со скорером, и корреляция, накапливаемая по всей последовательности (а не по короткому окну, где цель почти постоянна и сигнал тонет в шуме)."
+      },
+      {
+        "t": "p",
+        "v": "Инженерные рычаги, проверенные на практике:"
+      },
+      {
+        "t": "table",
+        "head": [
+          "Рычаг",
+          "Результат"
+        ],
+        "rows": [
+          [
+            "Метрико-выровненный лосс",
+            "одиночная модель обошла лучший ансамбль"
+          ],
+          [
+            "Горизонт корреляции",
+            "на полном окне сигнал в 4–5× сильнее, чем на коротком сегменте"
+          ],
+          [
+            "Трансформация фич внутри ONNX-графа",
+            "наивный пересчёт фич не влезал в лимит инференса; in-graph — влезает с запасом 1.38×"
+          ],
+          [
+            "Перепроверка документации стакана",
+            "заявленная раскладка bid/ask оказалась ложной — найдена перебором пар на 500k строк"
+          ]
+        ]
+      },
+      {
+        "t": "p",
+        "v": "Отдельный пласт — **устойчивость инфраструктуры**: обучение шло на GPU с 4 ГБ в WSL, который молча рестартовал под нагрузкой (утечка page cache через 9p-мост). Решение — `posix_fadvise(DONTNEED)` на каждую группу parquet; кэш стабилизировался."
+      },
+      {
+        "t": "p",
+        "v": "Задача соревновательная: подход и инженерные уроки описаны, конкретные данные, метрики и код не публикуются (правила площадки)."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** A model must predict one row at a time in a stream: every row depends on the full prior history, the window is tens of thousands of rows long, and the metric is block-wise correlation inside each sequence — not MSE. Standard recipes (window slicing, MSE loss) don't work here."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** A stateful recurrent model (GRU, step-by-step ONNX export) with a strict state contract: single-row inference, hidden state carried between calls. The key is a **metric-aligned loss** — the official block-wise aggregate reimplemented in torch and verified against the scorer, with correlation accumulated over the whole sequence (not a short window where the target is near-constant and the signal drowns)."
+      },
+      {
+        "t": "p",
+        "v": "Engineering levers, verified in practice:"
+      },
+      {
+        "t": "table",
+        "head": [
+          "Lever",
+          "Result"
+        ],
+        "rows": [
+          [
+            "Metric-aligned loss",
+            "a single model beat our best ensemble"
+          ],
+          [
+            "Correlation horizon",
+            "full-window signal is 4–5× stronger than on a short segment"
+          ],
+          [
+            "Feature transform inside the ONNX graph",
+            "naive recomputation blew the inference limit; in-graph fits with 1.38× headroom"
+          ],
+          [
+            "Re-deriving the documented order-book layout",
+            "the documented bid/ask layout was false — found by brute-forcing pairs over 500k rows"
+          ]
+        ]
+      },
+      {
+        "t": "p",
+        "v": "A separate layer was **infrastructure resilience**: training ran on a 4 GB GPU under WSL, which silently restarted under load (page-cache leak through the 9p bridge). The fix — `posix_fadvise(DONTNEED)` on every parquet row group — stabilised the cache."
+      },
+      {
+        "t": "p",
+        "v": "Competition task: the approach and engineering lessons are described; the data, metrics and code are not published (platform rules)."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Stateful-рекуррентная модель (GRU) с пошаговым экспортом в ONNX.",
+      "Строгий контракт состояния: инференс по одной строке, hidden state переносится между вызовами.",
+      "**Метрико-выровненный лосс**: официальный блочный агрегат на torch, побитово сверенный со скорером.",
+      "Корреляция накапливается по всей последовательности, а не по короткому окну.",
+      "Инфраструктурная устойчивость: `posix_fadvise(DONTNEED)` на каждую группу parquet."
+    ],
+    "en": [
+      "A stateful recurrent model (GRU) with step-by-step ONNX export.",
+      "A strict state contract: single-row inference, hidden state carried between calls.",
+      "A **metric-aligned loss**: the official block-wise aggregate reimplemented in torch and verified against the scorer.",
+      "Correlation accumulated over the whole sequence, not a short window.",
+      "Infrastructure resilience: `posix_fadvise(DONTNEED)` on every parquet row group."
+    ]
+  }
+}

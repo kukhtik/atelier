@@ -1,0 +1,105 @@
+/* Сетка: 12 / 6 / 4 колонки, оси A–L, сквозной subgrid (спека §10.3). */
+
+body { position: relative; }
+
+/* Декоративная рамка листа — вне сетки, не ловит мышь */
+.sheet-frame {
+  position: fixed;
+  inset: 10px;
+  border: var(--line-hair) solid var(--line-grid-decor);
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 767px) { .sheet-frame { inset: 6px; } }
+
+.sheet {
+  position: relative;
+  z-index: 1;
+  padding: var(--s-6) var(--margin) var(--s-16);
+  max-width: 1720px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+@media (min-width: 1200px) {
+  .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+}
+
+.c-full { grid-column: 1 / -1; }
+.c-half { grid-column: span 2; }
+.c-third { grid-column: span 2; }
+.c-two-thirds { grid-column: 1 / -1; }
+@media (min-width: 768px) {
+  .c-half { grid-column: span 3; }
+  .c-third { grid-column: span 2; }
+  .c-two-thirds { grid-column: span 4; }
+}
+@media (min-width: 1200px) {
+  .c-half { grid-column: span 6; }
+  .c-third { grid-column: span 4; }
+  .c-two-thirds { grid-column: span 8; }
+  .start-2 { grid-column-start: 2; }
+  .start-4 { grid-column-start: 4; }
+}
+
+/* Буквенные оси A–L над сеткой: только desktop, только декоративно */
+.axes {
+  display: none;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  margin-bottom: var(--s-2);
+}
+@media (min-width: 1200px) {
+  .axes {
+    display: grid;
+    border-top: var(--line-hair) solid var(--line-grid-decor);
+    padding-top: var(--s-1);
+  }
+  .axes span {
+    font-family: var(--font-mono);
+    font-size: var(--t-11-31);
+    letter-spacing: 0.08em;
+    color: var(--fg-secondary);
+    position: relative;
+  }
+  .axes span::before {
+    content: "+";
+    position: absolute;
+    left: -3px;
+    top: -1.55rem;
+    font-size: 10px;
+    line-height: 1;
+    color: var(--line-structural);
+  }
+}
+
+/* Секция листа: линия сверху, номер слева */
+.section { margin-top: var(--s-12); }
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  border-top: var(--line-hair) solid var(--line-structural);
+  padding-top: var(--s-2);
+  margin-bottom: var(--s-6);
+}
+.section-head .num {
+  font-family: var(--font-mono);
+  font-size: var(--t-13-45);
+  color: var(--accent-primary);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.section-head h2 {
+  font-size: var(--t-22-63);
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+.section-head .rule { flex: 1; height: 0; border-top: var(--line-hair) dashed var(--line-grid-decor); }

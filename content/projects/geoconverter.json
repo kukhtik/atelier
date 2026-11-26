@@ -1,0 +1,119 @@
+{
+  "slug": "geoconverter",
+  "index": "03",
+  "title": {
+    "ru": "GeoConverter",
+    "en": "GeoConverter"
+  },
+  "status": "production",
+  "years": null,
+  "confidentiality": {
+    "en": "Source private. Commercial product; client systems and licensing details under NDA.",
+    "ru": "Исходники закрыты. Коммерческий продукт; заказчики и детали лицензирования под NDA."
+  },
+  "summary": {
+    "ru": "Четырёхстадийный численный конвейер с обратной проверкой: замкнутый маршрут должен сойтись в пределах миллиметров.",
+    "en": "A four-stage numerical pipeline with a round-trip check: the closed route must come back within millimetres."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "погрешность замкнутого маршрута",
+        "en": "round-trip error"
+      },
+      "value": "<1 мм",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "стадий калибровки",
+        "en": "calibration stages"
+      },
+      "value": "4",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "допуск сходимости",
+        "en": "convergence tolerance"
+      },
+      "value": "1e-12",
+      "note": ""
+    }
+  ],
+  "results": [
+    {
+      "value": "<1 mm",
+      "label": {
+        "en": "round-trip error",
+        "ru": "погрешность замкнутого маршрута"
+      }
+    },
+    {
+      "value": "20+",
+      "label": {
+        "en": "local coordinate systems",
+        "ru": "локальных систем координат"
+      }
+    },
+    {
+      "value": "Commercial",
+      "label": {
+        "en": "release, government clients",
+        "ru": "релиз, государственные заказчики"
+      }
+    }
+  ],
+  "stack": "Python · NumPy / SciPy (least_squares, SVD) · PyQt6 · PyInstaller / Nuitka",
+  "link": "https://github.com/kukhtik/Open_space",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Перевод координат между унаследованными локальными системами и современными глобальными датумами (WGS-84) требует субмиллиметровой точности при сильных нелинейных искажениях. (Конкретные системы и зоны — конфиденциальны.)"
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Четырёхстадийный численный конвейер с обратной проверкой: замкнутый маршрут должен сойтись в пределах миллиметров."
+      },
+      {
+        "t": "p",
+        "v": "Опорные точки → **Helmert 3D (SVD)** → **Левенберг–Марквардт** → **Нелдер–Мид** (допуск 1e-12) → контроль ошибки замкнутого маршрута."
+      },
+      {
+        "t": "p",
+        "v": "**Коммерческий desktop-продукт** (Windows 7/10): аппаратно-привязанные ключи активации без внешнего сервера, встроенный выпуск лицензий, UI на PyQt6, автоматический разбор смешанных данных из AutoCAD, CSV и Excel."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** Converting coordinates between legacy local coordinate systems and modern global datums (WGS-84) requires sub-millimeter precision under strong non-linear distortions. (Exact local systems and zones in use are client-confidential.)"
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** A four-stage numerical pipeline with a round-trip check: the closed route must come back within millimetres."
+      },
+      {
+        "t": "p",
+        "v": "Reference points → **Helmert 3D (SVD)** → **Levenberg–Marquardt** → **Nelder–Mead** (tolerance 1e-12) → round-trip error validation."
+      },
+      {
+        "t": "p",
+        "v": "**Shipped as a commercial desktop product** (Windows 7/10): hardware-locked activation keys with no external server, a built-in license issuer, PyQt6 UI, and automated parsing of mixed data from AutoCAD, CSV and Excel."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Четырёхстадийный пайплайн: Helmert/SVD → Левенберг-Марквардт → Нелдер-Мид, допуск 1e-12.",
+      "Проверка невязки: замкнутый маршрут должен вернуться с миллиметровой точностью.",
+      "Desktop-продукт на PyQt6 с аппаратной привязкой ключей и офлайн-генератором лицензий."
+    ],
+    "en": [
+      "Four-stage pipeline: Helmert/SVD → Levenberg-Marquardt → Nelder-Mead, tolerance 1e-12.",
+      "Round-trip error validation: the closed route must return within millimetres.",
+      "PyQt6 desktop product with hardware-locked activation keys and an offline license issuer."
+    ]
+  }
+}

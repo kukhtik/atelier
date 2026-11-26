@@ -1,0 +1,159 @@
+{
+  "slug": "swarm",
+  "index": "11",
+  "title": {
+    "ru": "Swarm",
+    "en": "Swarm"
+  },
+  "status": "rnd",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Изоляция ролей: планировщик декомпозирует задачу в проверяемые шаги, исполнитель делает работу, верификатор открывается с чистым контекстом и судит исполнение — pytest, линтер, dry-run — а не слова агента.",
+    "en": "Role isolation: the planner decomposes a task into verifiable steps, the executor does the work, and a verifier opens with a fresh context to judge execution — pytest, linter, dry-run — never the agent’s word."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "проверок зелёные",
+        "en": "checks passed"
+      },
+      "value": "11/11",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "ходов",
+        "en": "turns"
+      },
+      "value": "4",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "референсный прогон",
+        "en": "reference run"
+      },
+      "value": "21 с",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "Python · Hermes Agent (канбан-диспетчер, middleware) · pytest как оракул · SHA-256 tamper-check · JSONL-траектории",
+  "link": "https://github.com/kukhtik/hermes-reform",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** LLM-агенты отчитываются «готово», когда работа не сделана — молча падают, оставляют заглушки, зацикливаются. Одиночный агент, проверяющий себя сам, страдает подтверждающим искажением."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Изоляция ролей: планировщик декомпозирует задачу в проверяемые шаги, исполнитель делает работу, верификатор открывается с чистым контекстом и судит исполнение — pytest, линтер, dry-run — а не слова агента."
+      },
+      {
+        "t": "table",
+        "head": [
+          "Механизм",
+          "Как устроен"
+        ],
+        "rows": [
+          [
+            "**Изоляция ролей**",
+            "Планировщик / исполнитель / верификатор — разные личности и контексты"
+          ],
+          [
+            "**Закрытая петля**",
+            "Выход каждого инструмента проверяется детерминированно до следующего шага"
+          ],
+          [
+            "**Защита границ**",
+            "Файлы `scope.protected` прибиты SHA-256; правка = автопровал задачи — ловятся и правки, и удаления (проверено механически)"
+          ],
+          [
+            "**Бюджет и эскалация**",
+            "Ограниченные ходы и попытки; после N провалов — эскалация к сильной модели или человеку по политике из пакета задачи"
+          ]
+        ]
+      },
+      {
+        "t": "p",
+        "v": "Референсный прогон (`demo-calc-bugfix`): оракул `python test_calc.py` → `ALL TESTS PASSED`, 11/11 проверок зелёные, 4 хода, 21 с, tamper false."
+      },
+      {
+        "t": "p",
+        "v": "Это контур v1 (октябрь). v2 добавляет замороженную карточку со скрытым ожидаемым значением, оракул без модели, верификатора на другой модели и fail-closed старт."
+      },
+      {
+        "t": "p",
+        "v": "**Открытый код:** [hermes-reform](https://github.com/kukhtik/hermes-reform) — 21 влитая ветка реформы (стабильность ядра, security-база, desktop-стабильность), CI + независимое ревью моделями. Там же runbook сопутствующего мультипрофильного шлюза: один Telegram-бот на 13 профилей агентов через DM-топики (маршрутизация thread → профиль)."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** LLM agents report “done” when the work is not done — they fail silently, leave stubs, loop. A single agent grading itself suffers confirmation bias."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** Role isolation: the planner decomposes a task into verifiable steps, the executor does the work, and a verifier opens with a fresh context to judge execution — pytest, linter, dry-run — never the agent’s word."
+      },
+      {
+        "t": "table",
+        "head": [
+          "Mechanism",
+          "How it works"
+        ],
+        "rows": [
+          [
+            "**Role isolation**",
+            "Planner / executor / verifier — separate personas and context windows"
+          ],
+          [
+            "**Closed tool loop**",
+            "Every tool output is checked deterministically before the next step"
+          ],
+          [
+            "**Boundary protection**",
+            "`scope.protected` files are SHA-256 pinned; editing one auto-fails the task — both edits and deletions are caught (verified mechanically)"
+          ],
+          [
+            "**Budget & escalation**",
+            "Bounded turns and attempts; after N failures the task escalates to a stronger model or a human, per the task package"
+          ]
+        ]
+      },
+      {
+        "t": "p",
+        "v": "Reference run (`demo-calc-bugfix`): oracle `python test_calc.py` → `ALL TESTS PASSED`, 11/11 checks green, 4 turns, 21 s wall, tamper false."
+      },
+      {
+        "t": "p",
+        "v": "This is the v1 contour (October). v2 adds a frozen card with a hidden expected value, a model-free oracle, a verifier that is a different model, and a fail-closed start."
+      },
+      {
+        "t": "p",
+        "v": "**Open code:** [hermes-reform](https://github.com/kukhtik/hermes-reform) — 21 merged reform branches (core stability, security baseline, desktop stability), CI + independent model review. Includes the runbook for the companion multi-profile gateway: one Telegram bot serving 13 agent profiles via DM topics (thread → profile routing)."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Изоляция ролей: планировщик, исполнитель и верификатор — разные личности и контексты.",
+      "Планировщик декомпозирует задачу в проверяемые шаги.",
+      "Верификатор открывается с чистым контекстом и судит исполнение по pytest, линтеру и dry-run, а не по словам агента.",
+      "Защита границ: файлы `scope.protected` прибиты SHA-256, правка или удаление автоматически проваливают задачу.",
+      "Бюджет и эскалация: ограниченные ходы и попытки, после N провалов — сильная модель или человек."
+    ],
+    "en": [
+      "Role isolation: planner, executor and verifier are separate personas with separate context windows.",
+      "The planner decomposes a task into verifiable steps.",
+      "The verifier opens with a fresh context and judges execution by pytest, linter and dry-run, not the agent's word.",
+      "Boundary protection: `scope.protected` files are SHA-256 pinned; an edit or deletion auto-fails the task.",
+      "Budget and escalation: bounded turns and attempts; after N failures, a stronger model or a human."
+    ]
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "name": {
+    "ru": "Максим Кухто",
+    "en": "Maxim Kukhto"
+  },
+  "role": {
+    "ru": "Python / AI-инженер",
+    "en": "Python / AI engineer"
+  },
+  "location": {
+    "ru": "Могилёв, Беларусь · удалённо",
+    "en": "Mogilev, Belarus · remote"
+  },
+  "timezone": "UTC+3",
+  "email": "maxkukhto@gmail.com",
+  "github": "https://github.com/kukhtik",
+  "linkedin": "https://www.linkedin.com/in/max-kukhto-517091337/",
+  "domain": "https://kukhto.is-a.dev",
+  "cv": {
+    "en": "assets/cv-en.pdf",
+    "ru": "assets/cv-ru.pdf"
+  },
+  "availability": {
+    "en": "Available full-time from late November 2026",
+    "ru": "Доступен для full-time работы с конца ноября 2026"
+  },
+  "hero": {
+    "lead": {
+      "ru": "Строю системы, которые работают без интернета: офлайн-RAG по документации, агентные контуры с машинной приёмкой, численная калибровка и CAD/GIS. Каждое число — из измеренного прогона.",
+      "en": "I build systems that work without internet: offline RAG over documentation, agent loops with machine acceptance, numerical calibration and CAD/GIS. Every number comes from a measured run."
+    }
+  },
+  "seo": {
+    "title": {
+      "en": "Maxim Kukhto — Python / AI engineer",
+      "ru": "Максим Кухто — Python / AI-инженер"
+    },
+    "description": {
+      "ru": "Строю системы, которые работают без интернета: офлайн-RAG по документации, агентные контуры с машинной приёмкой, численная калибровка и CAD/GIS. Каждое число — из измеренного прогона.",
+      "en": "I build systems that work without internet: offline RAG over documentation, agent loops with machine acceptance, numerical calibration and CAD/GIS. Every number comes from a measured run."
+    }
+  },
+  "manifest": {
+    "ru": [
+      "Система считается сделанной только тогда, когда её работу можно измерить и повторить.",
+      "Каждое число здесь взято из конкретного прогона; архитектура и исходники открыты там, где это позволяет договор."
+    ],
+    "en": [
+      "A system is finished only when its work can be measured and repeated.",
+      "Every number here comes from a specific run; architecture and source are open wherever the contract allows."
+    ]
+  },
+  "about": {
+    "en": [
+      "I am a medical-equipment engineer at the Mogilev Regional Oncology Dispensary, where I maintain Varian TrueBeam / VitalBeam linear accelerators. That work is safety-critical and documentation-heavy — which is exactly why I built Engineer Companion: a field engineer in an RF-shielded bunker needs the exact page in seconds, with no internet.",
+      "I have been building software alongside that role since 2020: a commercial geodetic converter, a production photo-to-DXF pipeline, an offline RAG system, and a live Telegram product. I am leaving the clinical role in November 2026 to work on software full-time.",
+      "Commercial projects are covered by NDA. I can show architecture, screenshots, and measured results; source stays private."
+    ],
+    "ru": [
+      "Я инженер по медицинскому оборудованию в УЗ «Могилёвский областной онкологический диспансер», обслуживаю линейные ускорители Varian TrueBeam / VitalBeam. Работа safety-critical и документационно тяжёлая — поэтому я и построил Engineer Companion: инженеру в бункере без интернета нужна точная страница за секунды.",
+      "С 2020 года параллельно строю софт: коммерческий геодезический конвертер, production-пайплайн «фото → DXF», offline-RAG, живой Telegram-продукт. В ноябре 2026 ухожу из клиники в разработку full-time.",
+      "Коммерческие проекты под NDA. Могу показать архитектуру, скриншоты и измеренные результаты; исходники остаются закрытыми."
+    ]
+  },
+  "record": [
+    {
+      "when": "2022 — 11.2026",
+      "title": {
+        "en": "Medical-equipment engineer · Mogilev Regional Oncology Dispensary",
+        "ru": "Инженер по медицинскому оборудованию · Могилёвский областной онкодиспансер"
+      },
+      "text": {
+        "en": "Maintenance of Varian TrueBeam and VitalBeam linear accelerators: dosimetry checks, MLC and imaging calibration, fault diagnosis in an RF-shielded bunker, service documentation with no margin for error.",
+        "ru": "Обслуживание линейных ускорителей Varian TrueBeam и VitalBeam: дозиметрический контроль, калибровка MLC и системы визуализации, поиск неисправностей в экранированном бункере, сервисная документация без права на ошибку."
+      }
+    },
+    {
+      "when": "2020 — 2026",
+      "title": {
+        "en": "Software alongside the service work",
+        "ru": "Разработка параллельно сервисной работе"
+      },
+      "text": {
+        "en": "A commercial geodetic converter, a production photo-to-DXF pipeline for surveyors, an offline RAG system for equipment documentation, and a live Telegram product on Cloudflare.",
+        "ru": "Коммерческий геодезический конвертер, production-пайплайн «фото → DXF» для геодезистов, offline-RAG по документации оборудования и живой Telegram-продукт на Cloudflare."
+      }
+    },
+    {
+      "when": "11.2026 →",
+      "title": {
+        "en": "Software full-time",
+        "ru": "Разработка full-time"
+      },
+      "text": {
+        "en": "Leaving the clinical role to build software with the same constraint I worked under for four years: the result has to be verifiable.",
+        "ru": "Ухожу из клиники, чтобы заниматься разработкой с тем же требованием, что и четыре года в сервисе: результат должен быть проверяемым."
+      }
+    }
+  ],
+  "facts": [
+    {
+      "label": {
+        "en": "Based",
+        "ru": "База"
+      },
+      "value": {
+        "en": "Mogilev, Belarus",
+        "ru": "Могилёв, Беларусь"
+      }
+    },
+    {
+      "label": {
+        "en": "Timezone",
+        "ru": "Часовой пояс"
+      },
+      "value": {
+        "en": "UTC+3",
+        "ru": "UTC+3"
+      }
+    },
+    {
+      "label": {
+        "en": "Availability",
+        "ru": "Доступность"
+      },
+      "value": {
+        "en": "Full-time from late Nov 2026",
+        "ru": "Full-time с конца ноября 2026"
+      }
+    },
+    {
+      "label": {
+        "en": "English",
+        "ru": "Английский"
+      },
+      "value": {
+        "en": "B2",
+        "ru": "B2"
+      }
+    },
+    {
+      "label": {
+        "en": "Focus",
+        "ru": "Фокус"
+      },
+      "value": {
+        "en": "RAG · CAD/GIS · Python",
+        "ru": "RAG · CAD/GIS · Python"
+      }
+    }
+  ],
+  "services": [
+    {
+      "number": "01",
+      "title": {
+        "en": "Offline and on-prem RAG",
+        "ru": "Offline и on-prem RAG"
+      },
+      "text": {
+        "en": "Document ingestion, hybrid retrieval, reranking, local quantized inference (llama.cpp / GGUF, ONNX), evaluation harnesses, evidence-linked answers.",
+        "ru": "Индексация документов, гибридный поиск, реранкинг, локальный инференс (llama.cpp / GGUF, ONNX), evaluation-харнессы, ответы со ссылками на источники."
+      }
+    },
+    {
+      "number": "02",
+      "title": {
+        "en": "CAD/GIS automation",
+        "ru": "Автоматизация CAD/GIS"
+      },
+      "text": {
+        "en": "DXF/DWG generation, photo-to-drawing CV pipelines, coordinate systems, numerical calibration, desktop tooling with PySide6/PyQt6.",
+        "ru": "Генерация DXF/DWG, CV-пайплайны «фото → чертёж», системы координат, численная калибровка, desktop-инструменты на PySide6/PyQt6."
+      }
+    },
+    {
+      "number": "03",
+      "title": {
+        "en": "Python backend and desktop",
+        "ru": "Python backend и desktop"
+      },
+      "text": {
+        "en": "FastAPI services, async pipelines, SQL schemas and migrations, Cloudflare Workers/D1/R2, CI with coverage and mutation gates.",
+        "ru": "Сервисы на FastAPI, асинхронные пайплайны, схемы и миграции SQL, Cloudflare Workers/D1/R2, CI с coverage и mutation gates."
+      }
+    }
+  ],
+  "more": [
+    {
+      "title": {
+        "en": "PenaPivo — live Telegram bot + Mini App",
+        "ru": "PenaPivo — живой Telegram-бот + Mini App"
+      },
+      "text": {
+        "en": "Serverless product on Cloudflare Workers / D1 / R2; CI with ≥84% branch coverage gate and mutation testing.",
+        "ru": "Serverless-продукт на Cloudflare Workers / D1 / R2; CI с coverage gate ≥84% и mutation testing."
+      },
+      "url": "https://t.me/PenaPivo_bot"
+    },
+    {
+      "title": {
+        "en": "Open Space — full project index",
+        "ru": "Open Space — полный индекс проектов"
+      },
+      "text": {
+        "en": "Architecture notes and screenshots for the projects that are not on this page.",
+        "ru": "Архитектура и скриншоты проектов, которых нет на этой странице."
+      },
+      "url": "https://github.com/kukhtik/Open_space"
+    }
+  ],
+  "ui": {
+    "work": {
+      "ru": "ЧЕРТЕЖИ",
+      "en": "DRAWINGS"
+    },
+    "approach": {
+      "ru": "ПОДХОД",
+      "en": "APPROACH"
+    },
+    "stack": {
+      "ru": "УЗЛЫ",
+      "en": "NODES"
+    },
+    "contact": {
+      "ru": "КОНТАКТ",
+      "en": "CONTACT"
+    },
+    "constructive": {
+      "ru": "КОНСТРУКТИВ",
+      "en": "CONSTRUCTIVE"
+    },
+    "context": {
+      "ru": "КОНТЕКСТ",
+      "en": "CONTEXT"
+    },
+    "medium": {
+      "ru": "НОСИТЕЛЬ",
+      "en": "MEDIUM"
+    },
+    "language": {
+      "ru": "ЯЗЫК",
+      "en": "LANGUAGE"
+    },
+    "scale": {
+      "ru": "МАСШТАБ 1:1",
+      "en": "SCALE 1:1"
+    },
+    "sheet": {
+      "ru": "ЛИСТ",
+      "en": "SHEET"
+    }
+  },
+  "status_labels": {
+    "production": {
+      "ru": "В ЭКСПЛУАТАЦИИ",
+      "en": "IN PRODUCTION"
+    },
+    "prototype": {
+      "ru": "ПРОТОТИП",
+      "en": "PROTOTYPE"
+    },
+    "rnd": {
+      "ru": "R&D",
+      "en": "R&D"
+    }
+  }
+}

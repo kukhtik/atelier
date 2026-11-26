@@ -1,0 +1,508 @@
+{
+  "layers": [
+    {
+      "id": "lang",
+      "label": {
+        "ru": "ЯЗЫК",
+        "en": "LANGUAGE"
+      }
+    },
+    {
+      "id": "data",
+      "label": {
+        "ru": "ДАННЫЕ",
+        "en": "DATA"
+      }
+    },
+    {
+      "id": "infra",
+      "label": {
+        "ru": "ИНФРА",
+        "en": "INFRA"
+      }
+    },
+    {
+      "id": "tools",
+      "label": {
+        "ru": "ИНСТРУМЕНТЫ",
+        "en": "TOOLS"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "python",
+      "label": "Python",
+      "layer": "lang",
+      "note": ""
+    },
+    {
+      "id": "javascript",
+      "label": "JavaScript",
+      "layer": "lang",
+      "note": ""
+    },
+    {
+      "id": "typescript",
+      "label": "TypeScript",
+      "layer": "lang",
+      "note": "5"
+    },
+    {
+      "id": "java",
+      "label": "Java",
+      "layer": "lang",
+      "note": "21"
+    },
+    {
+      "id": "gdscript",
+      "label": "GDScript",
+      "layer": "lang",
+      "note": ""
+    },
+    {
+      "id": "node",
+      "label": "Node.js",
+      "layer": "lang",
+      "note": "20+"
+    },
+    {
+      "id": "html-css",
+      "label": "HTML / CSS",
+      "layer": "lang",
+      "note": "HTML5 / CSS3"
+    },
+    {
+      "id": "lancedb-bm25",
+      "label": "LanceDB + BM25",
+      "layer": "data",
+      "note": "hybrid index"
+    },
+    {
+      "id": "sqlite",
+      "label": "SQLite",
+      "layer": "data",
+      "note": ""
+    },
+    {
+      "id": "postgresql",
+      "label": "PostgreSQL",
+      "layer": "data",
+      "note": "17"
+    },
+    {
+      "id": "redis",
+      "label": "Redis",
+      "layer": "data",
+      "note": ""
+    },
+    {
+      "id": "d1-r2",
+      "label": "Cloudflare D1 / R2",
+      "layer": "data",
+      "note": "SQL + object storage"
+    },
+    {
+      "id": "parquet",
+      "label": "Parquet",
+      "layer": "data",
+      "note": ""
+    },
+    {
+      "id": "jsonl",
+      "label": "JSONL",
+      "layer": "data",
+      "note": "trajectories"
+    },
+    {
+      "id": "rpc-websocket",
+      "label": "JSON-RPC / WebSocket",
+      "layer": "data",
+      "note": "transport"
+    },
+    {
+      "id": "docker",
+      "label": "Docker",
+      "layer": "infra",
+      "note": "Compose"
+    },
+    {
+      "id": "cloudflare-workers",
+      "label": "Cloudflare Workers",
+      "layer": "infra",
+      "note": "edge"
+    },
+    {
+      "id": "linux-wsl",
+      "label": "Linux / WSL",
+      "layer": "infra",
+      "note": ""
+    },
+    {
+      "id": "systemd",
+      "label": "systemd",
+      "layer": "infra",
+      "note": "units"
+    },
+    {
+      "id": "ci",
+      "label": "CI",
+      "layer": "infra",
+      "note": "quality gates"
+    },
+    {
+      "id": "telegram-api",
+      "label": "Telegram Bot API",
+      "layer": "infra",
+      "note": ""
+    },
+    {
+      "id": "pwa",
+      "label": "PWA",
+      "layer": "infra",
+      "note": "offline-first"
+    },
+    {
+      "id": "posix-fadvise",
+      "label": "posix_fadvise",
+      "layer": "infra",
+      "note": "DONTNEED"
+    },
+    {
+      "id": "pyside6-qml",
+      "label": "PySide6 / QML",
+      "layer": "tools",
+      "note": "Qt"
+    },
+    {
+      "id": "pyqt6",
+      "label": "PyQt6",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "onnx-runtime",
+      "label": "ONNX Runtime",
+      "layer": "tools",
+      "note": "incl. Mobile"
+    },
+    {
+      "id": "numpy-scipy",
+      "label": "NumPy / SciPy",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "pyinstaller-nuitka",
+      "label": "PyInstaller / Nuitka",
+      "layer": "tools",
+      "note": "desktop build"
+    },
+    {
+      "id": "resvg",
+      "label": "resvg",
+      "layer": "tools",
+      "note": "card rasterization"
+    },
+    {
+      "id": "fastify",
+      "label": "Fastify",
+      "layer": "tools",
+      "note": "5"
+    },
+    {
+      "id": "prisma",
+      "label": "Prisma",
+      "layer": "tools",
+      "note": "6"
+    },
+    {
+      "id": "vite",
+      "label": "Vite",
+      "layer": "tools",
+      "note": "6"
+    },
+    {
+      "id": "tailwind",
+      "label": "Tailwind",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "react",
+      "label": "React",
+      "layer": "tools",
+      "note": "18"
+    },
+    {
+      "id": "fastapi-jinja2",
+      "label": "FastAPI / Jinja2",
+      "layer": "tools",
+      "note": "REST + web UI"
+    },
+    {
+      "id": "ffmpeg",
+      "label": "ffmpeg",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "pytorch",
+      "label": "PyTorch",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "hermes-agent",
+      "label": "Hermes Agent",
+      "layer": "tools",
+      "note": "kanban dispatcher"
+    },
+    {
+      "id": "pytest",
+      "label": "pytest",
+      "layer": "tools",
+      "note": "oracle"
+    },
+    {
+      "id": "ccxt",
+      "label": "CCXT",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "pandas",
+      "label": "pandas",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "ezdxf",
+      "label": "ezdxf",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "godot",
+      "label": "Godot",
+      "layer": "tools",
+      "note": "4.7"
+    },
+    {
+      "id": "trimesh",
+      "label": "trimesh",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "pygltflib",
+      "label": "pygltflib",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "scikit-learn",
+      "label": "scikit-learn",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "opencv",
+      "label": "OpenCV",
+      "layer": "tools",
+      "note": ""
+    },
+    {
+      "id": "gemma-llamacpp",
+      "label": "Gemma-3-4B / llama.cpp",
+      "layer": "tools",
+      "note": "GGUF"
+    },
+    {
+      "id": "e5-mmarco",
+      "label": "multilingual-e5-small + mmarco",
+      "layer": "tools",
+      "note": "embeddings + reranker"
+    },
+    {
+      "id": "neuro-sdk",
+      "label": "Neuro SDK",
+      "layer": "tools",
+      "note": "WS action protocol"
+    }
+  ],
+  "projects": {
+    "python": [
+      "engineer-companion",
+      "geoconverter",
+      "static-sites",
+      "storybeam",
+      "swarm",
+      "trading-stand",
+      "vetka-dwg",
+      "vtuber-rigger"
+    ],
+    "javascript": [
+      "hermes-viz",
+      "penapivo",
+      "static-sites"
+    ],
+    "typescript": [
+      "razgon-kviz",
+      "storybeam"
+    ],
+    "java": [
+      "codebot"
+    ],
+    "gdscript": [
+      "neuro-property-trade"
+    ],
+    "node": [
+      "penapivo",
+      "razgon-kviz"
+    ],
+    "html-css": [
+      "static-sites"
+    ],
+    "lancedb-bm25": [
+      "engineer-companion"
+    ],
+    "sqlite": [
+      "hermes-viz"
+    ],
+    "postgresql": [
+      "razgon-kviz"
+    ],
+    "redis": [
+      "storybeam"
+    ],
+    "d1-r2": [
+      "penapivo"
+    ],
+    "parquet": [
+      "streaming-prediction",
+      "trading-stand"
+    ],
+    "jsonl": [
+      "swarm"
+    ],
+    "rpc-websocket": [
+      "codebot",
+      "hermes-viz",
+      "razgon-kviz"
+    ],
+    "docker": [
+      "codebot",
+      "razgon-kviz",
+      "storybeam"
+    ],
+    "cloudflare-workers": [
+      "penapivo"
+    ],
+    "linux-wsl": [
+      "streaming-prediction"
+    ],
+    "systemd": [
+      "trading-stand"
+    ],
+    "ci": [
+      "vetka-dwg"
+    ],
+    "telegram-api": [
+      "codebot"
+    ],
+    "pwa": [
+      "razgon-kviz"
+    ],
+    "posix-fadvise": [
+      "streaming-prediction"
+    ],
+    "pyside6-qml": [
+      "engineer-companion",
+      "vetka-dwg"
+    ],
+    "pyqt6": [
+      "geoconverter"
+    ],
+    "onnx-runtime": [
+      "engineer-companion",
+      "streaming-prediction"
+    ],
+    "numpy-scipy": [
+      "geoconverter",
+      "vtuber-rigger"
+    ],
+    "pyinstaller-nuitka": [
+      "geoconverter"
+    ],
+    "resvg": [
+      "penapivo"
+    ],
+    "fastify": [
+      "razgon-kviz"
+    ],
+    "prisma": [
+      "razgon-kviz"
+    ],
+    "vite": [
+      "razgon-kviz",
+      "storybeam"
+    ],
+    "tailwind": [
+      "storybeam"
+    ],
+    "react": [
+      "storybeam"
+    ],
+    "fastapi-jinja2": [
+      "storybeam",
+      "trading-stand"
+    ],
+    "ffmpeg": [
+      "storybeam"
+    ],
+    "pytorch": [
+      "streaming-prediction"
+    ],
+    "hermes-agent": [
+      "swarm"
+    ],
+    "pytest": [
+      "swarm",
+      "vtuber-rigger"
+    ],
+    "ccxt": [
+      "trading-stand"
+    ],
+    "pandas": [
+      "trading-stand"
+    ],
+    "ezdxf": [
+      "vetka-dwg"
+    ],
+    "godot": [
+      "neuro-property-trade"
+    ],
+    "trimesh": [
+      "vtuber-rigger"
+    ],
+    "pygltflib": [
+      "vtuber-rigger"
+    ],
+    "scikit-learn": [
+      "vtuber-rigger"
+    ],
+    "opencv": [
+      "vtuber-rigger"
+    ],
+    "gemma-llamacpp": [
+      "engineer-companion"
+    ],
+    "e5-mmarco": [
+      "engineer-companion"
+    ],
+    "neuro-sdk": [
+      "neuro-property-trade"
+    ]
+  }
+}

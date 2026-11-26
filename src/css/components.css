@@ -1,0 +1,352 @@
+/* Компоненты: шапка, планшет, штамп, переключатели, линейка (спека §12). */
+
+/* ---------- шапка листа ---------- */
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+  padding-bottom: var(--s-3);
+  border-bottom: var(--line-main) solid var(--line-structural);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-display);
+  font-size: var(--t-13-45);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-primary);
+  text-decoration: none;
+}
+.brand:hover { color: var(--accent-primary); }
+.brand .dot { color: var(--accent-primary); }
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-5);
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.nav a {
+  color: var(--fg-secondary);
+  text-decoration: none;
+  padding: var(--s-2) 0;
+  border-bottom: var(--line-hair) solid transparent;
+  display: inline-flex;
+  gap: 0.5em;
+  align-items: baseline;
+}
+.nav a:hover, .nav a[aria-current="page"] {
+  color: var(--fg-primary);
+  border-bottom-color: var(--accent-primary);
+}
+.nav a .n { color: var(--accent-primary); }
+
+.lang {
+  display: inline-flex;
+  gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.08em;
+}
+.lang a {
+  color: var(--fg-secondary);
+  text-decoration: none;
+  padding: var(--s-1) var(--s-2);
+  border: var(--line-hair) solid transparent;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lang a[aria-current="true"] { color: var(--fg-primary); border-color: var(--line-structural); }
+
+/* ---------- главный экран ---------- */
+.hero { margin-top: var(--s-10); align-items: start; }
+.hero-id {
+  font-family: var(--font-display);
+  font-size: clamp(var(--t-38-05), 7.6vw, var(--t-64));
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--s-3);
+  text-wrap: balance;
+}
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: var(--t-13-45);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin: 0 0 var(--s-6);
+}
+.hero-manifest { max-width: 46ch; font-size: var(--t-19-03); }
+.hero-manifest p { margin-bottom: var(--s-4); }
+.hero-figure {
+  position: relative;
+  border: var(--line-hair) solid var(--line-structural);
+  padding: var(--s-4);
+  background: var(--surface);
+}
+.hero-figure svg { display: block; width: 100%; height: auto; }
+.coords {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: var(--line-hair) dashed var(--line-grid-decor);
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.06em;
+  color: var(--fg-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- секция «что в реестре» ---------- */
+.link-row { display: grid; gap: var(--gutter); margin-top: var(--s-6); }
+.link-big {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-5) 0;
+  border-top: var(--line-hair) solid var(--line-structural);
+  text-decoration: none;
+  color: var(--fg-primary);
+  font-family: var(--font-display);
+  font-size: var(--t-22-63);
+  letter-spacing: -0.01em;
+}
+.link-big:hover { color: var(--accent-primary); }
+
+/* ---------- планшет проекта ---------- */
+.plate {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  border: var(--line-hair) solid var(--line-structural);
+  background: var(--surface);
+  min-height: 100%;
+}
+.plate:hover, .plate:focus-within { border-color: var(--accent-primary); }
+.plate-top {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  border-bottom: var(--line-hair) solid var(--line-structural);
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.08em;
+  color: var(--fg-secondary);
+}
+.plate-top .idx { color: var(--accent-primary); }
+.plate-fig { padding: var(--s-3); border-bottom: var(--line-hair) dashed var(--line-grid-decor); }
+.plate-fig svg { display: block; width: 100%; height: auto; }
+.plate-body { padding: var(--s-3) var(--s-3) 0; }
+.plate h3 {
+  font-family: var(--font-display);
+  font-size: var(--t-19-03);
+  font-weight: 500;
+  margin: 0 0 var(--s-2);
+  letter-spacing: -0.005em;
+}
+.plate-sum { font-size: var(--t-16); color: var(--fg-secondary); margin: 0 0 var(--s-3); overflow-wrap: anywhere; }
+.plate-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 84px), 1fr));
+  gap: var(--s-2) var(--s-3);
+  margin: 0;
+  padding: 0 0 var(--s-3);
+}
+.plate-metrics div { border-top: var(--line-hair) solid var(--line-grid-decor); padding-top: var(--s-1); }
+.plate-metrics dt {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.06em;
+  color: var(--fg-secondary);
+  text-transform: uppercase;
+}
+.plate-metrics dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-13-45);
+  color: var(--fg-primary);
+  font-variant-numeric: tabular-nums;
+}
+.plate-open {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--s-2) var(--s-3);
+  border-top: var(--line-hair) solid var(--line-structural);
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--fg-primary);
+  min-height: 44px;
+  align-items: center;
+}
+.plate-open:hover { background: var(--accent-primary); color: var(--bg); }
+
+/* ---------- переключатель «Конструктив / Контекст» ---------- */
+.mode-switch {
+  display: inline-flex;
+  border: var(--line-hair) solid var(--line-structural);
+  margin: 0 0 var(--s-6);
+}
+.mode-switch button {
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--s-2) var(--s-4);
+  min-height: 44px;
+  background: transparent;
+  color: var(--fg-secondary);
+  border: 0;
+  cursor: pointer;
+}
+.mode-switch button[aria-pressed="true"] { background: var(--fg-primary); color: var(--bg); }
+.mode-switch button + button { border-left: var(--line-hair) solid var(--line-structural); }
+
+[data-mode="context"] .view-constructive { display: none; }
+[data-mode="constructive"] .view-context { display: none; }
+
+/* ---------- штамп ---------- */
+.titleblock {
+  position: fixed;
+  right: var(--margin);
+  bottom: var(--margin);
+  width: 268px;
+  z-index: 20;
+  background: var(--surface);
+  border: var(--line-hair) solid var(--line-structural);
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.06em;
+  color: var(--fg-secondary);
+  text-transform: uppercase;
+}
+.titleblock .tb-head {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--s-2) var(--s-3);
+  border-bottom: var(--line-hair) solid var(--line-structural);
+  color: var(--fg-primary);
+}
+.titleblock dl { margin: 0; padding: var(--s-2) var(--s-3); display: grid; gap: 2px; }
+.titleblock .row { display: flex; justify-content: space-between; gap: var(--s-2); }
+.titleblock .row b { font-weight: 500; color: var(--fg-primary); }
+.mediums { display: grid; grid-template-columns: repeat(4, 1fr); border-top: var(--line-hair) solid var(--line-structural); }
+.mediums button {
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: var(--s-2) 0;
+  min-height: 44px;
+  background: transparent;
+  color: var(--fg-secondary);
+  border: 0;
+  cursor: pointer;
+}
+.mediums button + button { border-left: var(--line-hair) solid var(--line-structural); }
+.mediums button[aria-pressed="true"] { background: var(--fg-primary); color: var(--bg); }
+
+@media (max-width: 1199px) {
+  .titleblock { position: static; width: auto; margin-top: var(--s-8); }
+}
+
+/* ---------- линейка масштаба ---------- */
+.ruler {
+  display: none;
+  position: fixed;
+  left: 4px;
+  top: 38vh;
+  width: 22px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-secondary);
+  letter-spacing: 0.04em;
+}
+@media (min-width: 1200px) { .ruler { display: block; } }
+.ruler ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+.ruler li { border-left: var(--line-hair) solid var(--line-structural); padding-left: var(--s-2); }
+.ruler li.current { border-left-color: var(--accent-primary); color: var(--fg-primary); }
+
+/* ---------- таблица спецификаций ---------- */
+.spec { margin: var(--s-4) 0 var(--s-6); }
+.spec caption {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: var(--t-11-31);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+  padding-bottom: var(--s-2);
+}
+.spec th, .spec td { border-bottom: var(--line-hair) solid var(--line-grid-decor); }
+.spec tr:last-child td { border-bottom: var(--line-hair) solid var(--line-structural); }
+
+/* ---------- прочее ---------- */
+.callout {
+  border-left: var(--line-emph) solid var(--accent-primary);
+  padding: var(--s-2) 0 var(--s-2) var(--s-4);
+  margin: var(--s-6) 0;
+  color: var(--fg-primary);
+}
+.empty { color: var(--fg-secondary); font-family: var(--font-mono); font-size: var(--t-13-45); }
+.tag {
+  display: inline-block;
+  border: var(--line-hair) solid var(--line-structural);
+  padding: 2px var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+}
+.stackline { font-family: var(--font-mono); font-size: var(--t-13-45); color: var(--fg-secondary); overflow-wrap: anywhere; }
+
+/* раскладка главного экрана */
+.hero-text { grid-column: 1 / -1; }
+.hero-figure { grid-column: 1 / -1; margin: var(--s-6) 0 0; }
+@media (min-width: 1200px) {
+  .hero-text { grid-column: span 7; }
+  .hero-figure { grid-column: 9 / span 4; margin: 0; }
+}
+
+/* досье */
+.dossier-head { margin-top: var(--s-8); padding-bottom: var(--s-5); border-bottom: var(--line-main) solid var(--line-structural); }
+.dossier-head h1 { margin: var(--s-2) 0 var(--s-3); }
+.ax { display: block; width: 100%; height: auto; }
+.ax text, .ax-label { font-family: var(--font-mono); font-size: 11.31px; letter-spacing: .06em; }
+ol { padding-left: 1.2em; }
+li { margin-bottom: .4em; }
+
+/* переносы и защита от длинных токенов */
+.prose p, .prose li, li, td, th, dd, dt, .stackline, .plate-body h3 { overflow-wrap: anywhere; }
+.spec { table-layout: fixed; }
+.spec th { width: 42%; }
+.dossier .dwg a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* граф узлов */
+.graph-wrap { overflow-x: auto; border: var(--line-hair) solid var(--line-structural); padding: var(--s-3); }
+.graph { display: block; width: 2200px; height: 630px; max-width: none; }
+.node { cursor: pointer; outline: none; }
+.node circle { transition: none; }
+.node:hover circle, .node:focus-visible circle { fill: var(--accent-primary); r: 6; }
+.node:focus-visible circle { stroke: var(--accent-primary); stroke-width: 2; }
+.edge.is-active { stroke: var(--accent-primary); opacity: 1; }
+.graph[data-dim="1"] .edge { opacity: .35; }

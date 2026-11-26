@@ -1,0 +1,181 @@
+{
+  "slug": "static-sites",
+  "index": "08",
+  "title": {
+    "ru": "Статические сайты",
+    "en": "Static Websites"
+  },
+  "status": "production",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Два сайта вручную — HTML, CSS, немного SVG и JS, **ни одного фреймворка и ни одной сторонней библиотеки**. Сделаны в двух разных визуальных языках, чтобы показать диапазон, а не один приём дважды: «Сократилин» — концепт «инженерный чертёж» (миллиметровка, боковой реестр, лента кейсов на sticky), «Слава Швед» — 6 страниц с постерной типографикой, рваными краями, masonry-галереей и фильтрами.",
+    "en": "Two sites built by hand — HTML, CSS, a little SVG and JS, **zero frameworks and zero third-party libraries**. They use two different visual languages on purpose, to show range rather than one trick twice: \"Sokratilin\" — an engineering-drawing concept (graph paper, a side register, a sticky case strip); \"Slava Shved\" — 6 pages of poster typography, torn edges, a masonry gallery and filters."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "сторонних библиотек",
+        "en": "third-party libraries"
+      },
+      "value": "0",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "горизонтальный скролл",
+        "en": "horizontal scroll"
+      },
+      "value": "0 px",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "битых картинок",
+        "en": "broken images"
+      },
+      "value": "0",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "JS-ошибок",
+        "en": "JS errors"
+      },
+      "value": "0",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "комбинаций проверено",
+        "en": "combinations checked"
+      },
+      "value": "16",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "чистый HTML5 · CSS3 (grid, clamp, aspect-ratio, sticky, IntersectionObserver) · инлайн SVG · JavaScript без библиотек · генератор страниц на Python",
+  "link": "https://github.com/kukhtik/site-concepts",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Сайт-визитка на конструкторе весит сотни килобайт движка и не даёт контроля над типографикой и адаптивом. Но и «ручная вёрстка» часто означает либо фреймворк, либо кашу из костылей."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Два сайта вручную — HTML, CSS, немного SVG и JS, **ни одного фреймворка и ни одной сторонней библиотеки**. Сделаны в двух разных визуальных языках, чтобы показать диапазон, а не один приём дважды: «Сократилин» — концепт «инженерный чертёж» (миллиметровка, боковой реестр, лента кейсов на sticky), «Слава Швед» — 6 страниц с постерной типографикой, рваными краями, masonry-галереей и фильтрами."
+      },
+      {
+        "t": "p",
+        "v": "**Что проверено замером, а не на глаз** (headless Chrome, DevTools-протокол): горизонтальный скролл **0 px**, битые картинки **0**, JS-ошибки **0**, вычисленные стили реально применились — на десктопе 1440 и мобильном 390, по 8 и 16 комбинаций."
+      },
+      {
+        "t": "table",
+        "head": [
+          "Метрика",
+          "Сократилин",
+          "Швед (6 стр.)"
+        ],
+        "rows": [
+          [
+            "Сторонних библиотек",
+            "**0**",
+            "**0**"
+          ],
+          [
+            "Картинок",
+            "**0** (весь визуал — CSS и SVG)",
+            "16 (заглушки с пропорциями)"
+          ],
+          [
+            "Горизонтальный скролл",
+            "**0 px**",
+            "**0 px**"
+          ]
+        ]
+      },
+      {
+        "t": "p",
+        "v": "**Найденные и исправленные дефекты** — реальные, не гипотетические: две лишние `}` в CSS (браузер молча прекращал разбор, `:root` не доходил до страницы, шрифт падал в Times New Roman — глазами не видно, нашлось только замером доли дошедших правил); `overflow-x: clip` на `body` ломал `position: sticky`; шрифт был объявлен под чужим именем; в выбранном шрифте вообще не было кириллицы — проверено по таблице `cmap`."
+      },
+      {
+        "t": "p",
+        "v": "Отдельный слой — **перенос в Тильду**: тот же сайт упакован так, чтобы заказчик правил контент сам, без разработчика (разметка → 6 блоков T123, единая схема путей для Тильды / GitHub Pages / локального просмотра)."
+      },
+      {
+        "t": "p",
+        "v": "**Живая витрина:** [kukhtik.github.io/site-concepts](https://kukhtik.github.io/site-concepts/)"
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** A business-card site on a website builder carries hundreds of KB of engine and gives no control over typography or responsive behaviour. But \"hand-coded\" too often means either a framework or a pile of hacks."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** Two sites built by hand — HTML, CSS, a little SVG and JS, **zero frameworks and zero third-party libraries**. They use two different visual languages on purpose, to show range rather than one trick twice: \"Sokratilin\" — an engineering-drawing concept (graph paper, a side register, a sticky case strip); \"Slava Shved\" — 6 pages of poster typography, torn edges, a masonry gallery and filters."
+      },
+      {
+        "t": "p",
+        "v": "**Verified by measurement, not by eye** (headless Chrome, DevTools protocol): horizontal scroll **0 px**, broken images **0**, JS errors **0**, computed styles actually applied — at desktop 1440 and mobile 390, across 8 and 16 combinations."
+      },
+      {
+        "t": "table",
+        "head": [
+          "Metric",
+          "Sokratilin",
+          "Shved (6 pages)"
+        ],
+        "rows": [
+          [
+            "Third-party libraries",
+            "**0**",
+            "**0**"
+          ],
+          [
+            "Images",
+            "**0** (all visuals in CSS and SVG)",
+            "16 (proportion placeholders)"
+          ],
+          [
+            "Horizontal scroll",
+            "**0 px**",
+            "**0 px**"
+          ]
+        ]
+      },
+      {
+        "t": "p",
+        "v": "**Defects found and fixed** — real ones, not hypothetical: two stray `}` in the CSS (the browser silently stopped parsing, `:root` never reached the page, the font fell back to Times New Roman — invisible to the eye, caught only by measuring how many rules reached the parser); `overflow-x: clip` on `body` broke `position: sticky`; a font declared under the wrong name; and the chosen font had no Cyrillic at all — verified by reading its `cmap` table."
+      },
+      {
+        "t": "p",
+        "v": "A separate layer — a **Tilda port**: the same site packaged so the client edits content themselves, without a developer (markup → six T123 blocks, one path scheme that works across Tilda, GitHub Pages and local viewing)."
+      },
+      {
+        "t": "p",
+        "v": "**Live showcase:** [kukhtik.github.io/site-concepts](https://kukhtik.github.io/site-concepts/)"
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Два сайта вручную: HTML, CSS, немного SVG и JS, **ни одного фреймворка и ни одной сторонней библиотеки**.",
+      "Два разных визуальных языка: «Сократилин» — инженерный чертёж, «Слава Швед» — постерная типографика.",
+      "Проверка замером в headless Chrome: скролл, битые картинки, JS-ошибки, применение стилей.",
+      "Отдельный слой — перенос в Тильду, чтобы заказчик правил контент сам."
+    ],
+    "en": [
+      "Two sites built by hand: HTML, CSS, a little SVG and JS, **zero frameworks and zero third-party libraries**.",
+      "Two different visual languages: \"Sokratilin\" as an engineering drawing, \"Slava Shved\" as poster typography.",
+      "Verified by measurement in headless Chrome: scroll, broken images, JS errors, applied styles.",
+      "A separate layer is the Tilda port, so the client edits content without a developer."
+    ]
+  }
+}

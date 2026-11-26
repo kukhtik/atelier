@@ -1,0 +1,91 @@
+{
+  "slug": "codebot",
+  "index": "01",
+  "title": {
+    "ru": "Codebot",
+    "en": "Codebot"
+  },
+  "status": "prototype",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Telegram-бот на Java 21 без зависимостей (63 класса, ~10,9k строк, обычный `javac` — без Maven/Gradle): мост к локальному серверу кодинг-агента по JSON-RPC/WebSocket — живые состояния хода, аппрувы, переключение/импорт/архив сессий, вложения, срочный steering; режим, где каждый пользователь подключает свою машину.",
+    "en": "A dependency-free Java 21 Telegram bot (63 classes, ~10.9k LOC, plain `javac` — no Maven/Gradle) bridging to a local coding-agent server over JSON-RPC/WebSocket: live turn states, approvals, session switch/import/archive, attachments, urgent steering; shared mode where each Telegram user pairs their own machine."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "исходников компилируется",
+        "en": "sources compiled"
+      },
+      "value": "63",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "строк кода",
+        "en": "lines of code"
+      },
+      "value": "~10 900",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "зависимостей",
+        "en": "dependencies"
+      },
+      "value": "0",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "Java 21 (без build-системы) · Telegram Bot API (long polling + webhook) · JSON-RPC поверх WebSocket · Docker Compose",
+  "link": "https://github.com/kukhtik/Open_space",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Кодинг-агент работает на станции, но управлять им с телефона не должно требовать ноутбука."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Telegram-бот на Java 21 без зависимостей (63 класса, ~10,9k строк, обычный `javac` — без Maven/Gradle): мост к локальному серверу кодинг-агента по JSON-RPC/WebSocket — живые состояния хода, аппрувы, переключение/импорт/архив сессий, вложения, срочный steering; режим, где каждый пользователь подключает свою машину."
+      },
+      {
+        "t": "p",
+        "v": "Референсный прогон: **63 исходника компилируются обычным `javac` (0 ошибок)**, встроенный headless self-test проходит."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** Coding agents run on a workstation, but steering them from a phone should not require opening a laptop."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** A dependency-free Java 21 Telegram bot (63 classes, ~10.9k LOC, plain `javac` — no Maven/Gradle) bridging to a local coding-agent server over JSON-RPC/WebSocket: live turn states, approvals, session switch/import/archive, attachments, urgent steering; shared mode where each Telegram user pairs their own machine."
+      },
+      {
+        "t": "p",
+        "v": "Reference run: **63 sources compile with plain `javac` (0 errors)** and the built-in headless self-test passes."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Telegram-бот на Java 21 без зависимостей: 63 класса, обычный `javac`, без Maven и Gradle.",
+      "Мост к локальному серверу кодинг-агента по JSON-RPC поверх WebSocket.",
+      "Живые состояния хода, аппрувы, переключение, импорт и архив сессий, вложения и срочный steering.",
+      "Режим, где каждый пользователь подключает свою машину."
+    ],
+    "en": [
+      "A dependency-free Java 21 Telegram bot: 63 classes, plain `javac`, no Maven or Gradle.",
+      "A bridge to the local coding-agent server over JSON-RPC on WebSocket.",
+      "Live turn states, approvals, session switch, import and archive, attachments and urgent steering.",
+      "Shared mode where each user pairs their own machine."
+    ]
+  }
+}

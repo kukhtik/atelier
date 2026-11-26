@@ -1,0 +1,119 @@
+{
+  "slug": "vetka-dwg",
+  "index": "13",
+  "title": {
+    "ru": "VETKA_DWG",
+    "en": "VETKA_DWG"
+  },
+  "status": "production",
+  "years": null,
+  "confidentiality": {
+    "en": "Source private. Commercial use and government clients under NDA; architecture, screenshots and measured results are shown here.",
+    "ru": "Исходники закрыты. Коммерческое использование и государственные заказчики под NDA; здесь показаны архитектура, скриншоты и измеренные результаты."
+  },
+  "summary": {
+    "ru": "Фото абриса → распознавание маркеров и текста → топографический DXF/DWG. **4 часа ручного черчения → 15 минут.** В продакшене у геодезических компаний (Беларусь).",
+    "en": "Photo of the sketch → marker and text recognition → topographic DXF/DWG. **4 hours of manual drafting → 15 minutes.** In production use with surveying companies (Belarus)."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "время ручного черчения",
+        "en": "manual drafting time"
+      },
+      "value": "4 ч → 15 мин",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "блоков ГУГК в библиотеке",
+        "en": "GUGK blocks in library"
+      },
+      "value": "444/444",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "осей точности",
+        "en": "accuracy axes"
+      },
+      "value": "5",
+      "note": ""
+    }
+  ],
+  "results": [
+    {
+      "value": "4 h → 15 min",
+      "label": {
+        "en": "manual drafting time",
+        "ru": "время ручного черчения"
+      }
+    },
+    {
+      "value": "3",
+      "label": {
+        "en": "surveying companies in production",
+        "ru": "геодезические компании в production"
+      }
+    },
+    {
+      "value": "444",
+      "label": {
+        "en": "GUGK blocks in the library",
+        "ru": "блока ГУГК в библиотеке"
+      }
+    }
+  ],
+  "stack": "Python · собственный CV-пайплайн (детекция маркеров, OCR) · ezdxf · библиотека знаков ГУГК · PySide6 / QML · CI с quality gates",
+  "link": "https://github.com/kukhtik/Open_space",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Проблема.** Геодезист рисует полевой абрис (набросок с нумерованными точками) и потом часами переносит его в CAD."
+      },
+      {
+        "t": "p",
+        "v": "**Подход.** Фото абриса → распознавание маркеров и текста → топографический DXF/DWG. **4 часа ручного черчения → 15 минут.** В продакшене у геодезических компаний (Беларусь)."
+      },
+      {
+        "t": "p",
+        "v": "Аудит библиотеки блоков: **444 / 444 блока проходят все пять осей точности** относительно эталонного шаблона (библиотека знаков ГУГК, ШАБЛОН‑2025)."
+      },
+      {
+        "t": "p",
+        "v": "Исходники закрыты (коммерческое использование); здесь описаны архитектура и результаты аудита."
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**Problem.** A surveyor draws a field abris (a hand sketch with numbered points) and then spends hours transferring it into CAD."
+      },
+      {
+        "t": "p",
+        "v": "**Approach.** Photo of the sketch → marker and text recognition → topographic DXF/DWG. **4 hours of manual drafting → 15 minutes.** In production use with surveying companies (Belarus)."
+      },
+      {
+        "t": "p",
+        "v": "Block-library audit: **444 / 444 blocks pass all five fidelity axes** against the reference template (GUGK sign library, ШАБЛОН‑2025)."
+      },
+      {
+        "t": "p",
+        "v": "Source is private (commercial use); architecture and audit results are documented here."
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Детекция маркеров и текста на фото с телефона, OCR для номеров точек и подписей.",
+      "Библиотека из 444 блоков ГУГК с аудитом точности относительно эталонного шаблона.",
+      "Генерация DXF, desktop-оболочка на PySide6/QML и quality gates в CI."
+    ],
+    "en": [
+      "Marker and text detection on a phone photo, followed by OCR for point numbers and labels.",
+      "A 444-block GUGK sign library with a fidelity audit against the reference template.",
+      "DXF generation with a PySide6/QML desktop shell and CI quality gates."
+    ]
+  }
+}

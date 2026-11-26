@@ -1,0 +1,91 @@
+{
+  "slug": "penapivo",
+  "index": "06",
+  "title": {
+    "ru": "PenaPivo / BeerLog",
+    "en": "PenaPivo / BeerLog"
+  },
+  "status": "production",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Живой Telegram-продукт: пивной журнал дегустаций с записями, статистикой, карточками профиля и рейтингами.",
+    "en": "A live Telegram product: a beer-tasting journal with write-ups, statistics, shareable profile cards and ratings."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "покрытие ветвей",
+        "en": "branch coverage"
+      },
+      "value": "≥84%",
+      "note": "coverage-gate"
+    },
+    {
+      "name": {
+        "ru": "маршрутов API",
+        "en": "API routes"
+      },
+      "value": "123",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "миграций SQL",
+        "en": "SQL migrations"
+      },
+      "value": "14",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "JavaScript (ESM) · Cloudflare Workers / D1 / R2 · Node.js · resvg (растеризация карточек)",
+  "link": "https://t.me/PenaPivo_bot",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Что это.** Живой Telegram-продукт: пивной журнал дегустаций с записями, статистикой, карточками профиля и рейтингами."
+      },
+      {
+        "t": "p",
+        "v": "**Архитектура:** Cloudflare Workers (edge) · D1 (SQL) · R2 (бэкапы) · Telegram Mini App с i18n (ru/en/be) · CI: coverage-gate **≥84% ветвей** + mutation testing (Stryker)."
+      },
+      {
+        "t": "p",
+        "v": "**Живой бот:** [@PenaPivo_bot](https://t.me/PenaPivo_bot)"
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**What it is.** A live Telegram product: a beer-tasting journal with write-ups, statistics, shareable profile cards and ratings."
+      },
+      {
+        "t": "p",
+        "v": "**Architecture:** Cloudflare Workers (edge) · D1 (SQL) · R2 (backups) · Telegram Mini App with i18n (ru/en/be) · CI: coverage gate **≥84% branches** + mutation testing (Stryker)."
+      },
+      {
+        "t": "p",
+        "v": "**Live bot:** [@PenaPivo_bot](https://t.me/PenaPivo_bot)"
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Живой Telegram-продукт: журнал дегустаций с записями, статистикой, карточками профиля и рейтингами.",
+      "Cloudflare Workers на edge, D1 для SQL, R2 для бэкапов.",
+      "Telegram Mini App с i18n (ru/en/be).",
+      "CI с coverage-gate ≥84% ветвей и mutation testing (Stryker)."
+    ],
+    "en": [
+      "A live Telegram product: a tasting journal with write-ups, statistics, profile cards and ratings.",
+      "Cloudflare Workers on the edge, D1 for SQL, R2 for backups.",
+      "Telegram Mini App with i18n (ru/en/be).",
+      "CI with a ≥84% branch coverage gate and mutation testing (Stryker)."
+    ]
+  }
+}

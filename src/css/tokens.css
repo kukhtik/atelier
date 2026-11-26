@@ -1,0 +1,143 @@
+/* Токены дизайн-кода. Источник значений — спека §10.1 (дизайн-док §4.1).
+   Значения не менять: контрасты проверяет gates/check_contrast.py. */
+
+:root,
+[data-medium="void"] {
+  /* I. Leonidov Void — чёрный картон */
+  --bg: #0B0C0E;
+  --surface: #131519;
+  --fg-primary: #F1EFE9;
+  --fg-secondary: #A5A8B0;
+  --line-structural: #646973;
+  --line-grid-decor: #23262E;
+  --accent-primary: #FF533D;
+  --accent-secondary: #E0B354;
+
+  /* Кристаллические акценты Таута — только тёмные носители, только графика */
+  --taut-emerald: #2FE09B;
+  --taut-cobalt: #5CA4FF;
+  --taut-ruby: #FF5C8A;
+  --taut-amber: #FFB84D;
+}
+
+[data-medium="cyanotype"] {
+  /* II. Prussian Cyanotype — синька */
+  --bg: #002B49;
+  --surface: #00365C;
+  --fg-primary: #F2F7FB;
+  --fg-secondary: #A7CBE4;
+  --line-structural: #6FAFD6;
+  --line-grid-decor: #164A6E;
+  --accent-primary: #FFCA5C;
+  --accent-secondary: #6EE2FF;
+}
+
+[data-medium="chiaroscuro"] {
+  /* III. Ferriss Chiaroscuro — уголь и свет */
+  --bg: #141416;
+  --surface: #1E1F22;
+  --fg-primary: #ECE6DA;
+  --fg-secondary: #A7A39A;
+  --line-structural: #706D66;
+  --line-grid-decor: #2B2C30;
+  --accent-primary: #E5B96B;
+  --accent-secondary: #E66A4E;
+}
+
+[data-medium="vellum"] {
+  /* IV. Architectural Vellum — калька / офорт */
+  --bg: #F4F1EA;
+  --surface: #E9E4D9;
+  --fg-primary: #121316;
+  --fg-secondary: #4B4E56;
+  --line-structural: #787B82;
+  --line-grid-decor: #D5CFC2;
+  --accent-primary: #BD2B1C;
+  --accent-secondary: #003153;
+}
+
+/* Без JS и до атрибута: светлая система — калька, тёмная — чёрный картон. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-medium]) {
+    --bg: #F4F1EA;
+    --surface: #E9E4D9;
+    --fg-primary: #121316;
+    --fg-secondary: #4B4E56;
+    --line-structural: #787B82;
+    --line-grid-decor: #D5CFC2;
+    --accent-primary: #BD2B1C;
+    --accent-secondary: #003153;
+  }
+}
+
+/* Прогрессивный слой: перцептивное пространство там, где браузер умеет. */
+@supports (color: oklch(50% 0.1 200)) {
+  :root,
+  [data-medium="void"] {
+    --accent-hover: color-mix(in oklch, var(--accent-primary) 82%, var(--fg-primary));
+  }
+  [data-medium="cyanotype"] {
+    --accent-hover: color-mix(in oklch, var(--accent-primary) 82%, var(--bg));
+  }
+  [data-medium="chiaroscuro"] {
+    --accent-hover: color-mix(in oklch, var(--accent-primary) 82%, var(--fg-primary));
+  }
+  [data-medium="vellum"] {
+    --accent-hover: color-mix(in oklch, var(--accent-primary) 82%, var(--bg));
+  }
+}
+
+:root {
+  /* Шкала √2 (спека §10.2): 16 × 2^(n/4) */
+  --t-11-31: 11.31px;
+  --t-13-45: 13.45px;
+  --t-16: 16px;
+  --t-19-03: 19.03px;
+  --t-22-63: 22.63px;
+  --t-26-91: 26.91px;
+  --t-32: 32px;
+  --t-38-05: 38.05px;
+  --t-45-25: 45.25px;
+  --t-53-82: 53.82px;
+  --t-64: 64px;
+
+  /* Шаг сетки и отступы (спека §10.3) */
+  --margin: 32px;
+  --gutter: 24px;
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+
+  /* Линии по ISO 128 (спека §10.4) */
+  --line-hair: 1px;
+  --line-main: 1.5px;
+  --line-emph: 2px;
+
+  /* Углы: 15°, 23.5°, 30° — тангенсы для clip-path и диагоналей */
+  --tan-15: 0.2679;
+  --tan-23-5: 0.4348;
+  --tan-30deg: 0.5774;
+
+  --font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --font-body: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Martian Mono", "Consolas", ui-monospace, monospace;
+
+  color-scheme: dark;
+}
+
+[data-medium="vellum"] { color-scheme: light; }
+
+@media (max-width: 1199px) {
+  :root { --margin: 24px; --gutter: 20px; }
+}
+@media (max-width: 767px) {
+  :root { --margin: 20px; --gutter: 16px; }
+}

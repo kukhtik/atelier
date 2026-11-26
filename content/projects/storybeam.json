@@ -1,0 +1,151 @@
+{
+  "slug": "storybeam",
+  "index": "09",
+  "title": {
+    "ru": "Storybeam",
+    "en": "Storybeam"
+  },
+  "status": "prototype",
+  "years": null,
+  "confidentiality": {
+    "en": "Public code",
+    "ru": "Публичный код"
+  },
+  "summary": {
+    "ru": "Активный форк [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo), перестроенный в платформу: React-фронтенд поверх REST API, длинные форматы, контроль затрат, комплаенс.",
+    "en": "An active fork of [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo) rebuilt into a platform: React front-end over the REST API, long-form mode, cost governance, policy compliance."
+  },
+  "metrics": [
+    {
+      "name": {
+        "ru": "коммитов",
+        "en": "commits"
+      },
+      "value": "56",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "строк добавлено",
+        "en": "lines added"
+      },
+      "value": "+14 955",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "строк удалено",
+        "en": "lines removed"
+      },
+      "value": "−6 559",
+      "note": ""
+    },
+    {
+      "name": {
+        "ru": "файлов изменено",
+        "en": "files changed"
+      },
+      "value": "108",
+      "note": ""
+    }
+  ],
+  "results": [],
+  "stack": "Python / FastAPI · React 18 + TypeScript + Vite + Tailwind · Redis (состояние задач) · ffmpeg · Docker",
+  "link": "https://github.com/kukhtik/Open_space",
+  "context": {
+    "ru": [
+      {
+        "t": "p",
+        "v": "**Что это.** Активный форк [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo), перестроенный в платформу: React-фронтенд поверх REST API, длинные форматы, контроль затрат, комплаенс."
+      },
+      {
+        "t": "p",
+        "v": "**Что изменили** (56 коммитов, +14 955 / −6 559 строк в 108 файлах):"
+      },
+      {
+        "t": "table",
+        "head": [
+          "Область",
+          "Изменение"
+        ],
+        "rows": [
+          [
+            "**Длинные форматы**",
+            "сценарий чанками по длительности; resume/idempotency по сценам; ограничение числа сцен"
+          ],
+          [
+            "**Контроль затрат**",
+            "дозированный image-to-video (хук + главы) + лимит расходов на задачу (`LongFormCostGovernor`)"
+          ],
+          [
+            "**Комплаенс**",
+            "раскрытие AI-синтетики при загрузке; защита от вводящих метаданных; структурное варьирование (анти-шаблонность)"
+          ],
+          [
+            "**Продукт**",
+            "полный React UI Create / Library / Settings с API-key gate; Telegram-бот полного паритета (deny-by-default multiuser)"
+          ],
+          [
+            "**Безопасность**",
+            "API-авторизация включена по умолчанию, bind 127.0.0.1, фикс path traversal, редакция секретов в логах"
+          ]
+        ]
+      }
+    ],
+    "en": [
+      {
+        "t": "p",
+        "v": "**What it is.** An active fork of [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo) rebuilt into a platform: React front-end over the REST API, long-form mode, cost governance, policy compliance."
+      },
+      {
+        "t": "p",
+        "v": "**What we changed** (56 commits, +14,955 / −6,559 lines across 108 files):"
+      },
+      {
+        "t": "table",
+        "head": [
+          "Area",
+          "Change"
+        ],
+        "rows": [
+          [
+            "**Long-form**",
+            "duration-driven chunked script; per-scene resume/idempotency; scene-count cap"
+          ],
+          [
+            "**Cost governance**",
+            "dosed image-to-video (hook + chapter beats) + per-task spend cap (`LongFormCostGovernor`)"
+          ],
+          [
+            "**Compliance**",
+            "AI-synthetic-content disclosure on upload; anti-misleading metadata guardrails; per-video structural variation (anti-templated output)"
+          ],
+          [
+            "**Product surface**",
+            "full React Create / Library / Settings UI with an API-key gate; full-parity Telegram bot (deny-by-default multiuser)"
+          ],
+          [
+            "**Security**",
+            "API auth on by default, bind 127.0.0.1, path-traversal fix, secret redaction in logs"
+          ]
+        ]
+      }
+    ]
+  },
+  "approach": {
+    "ru": [
+      "Активный форк MoneyPrinterTurbo, перестроенный в платформу.",
+      "React-фронтенд поверх REST API: Create, Library, Settings с API-key gate.",
+      "Длинные форматы: сценарий чанками по длительности, resume/idempotency по сценам, ограничение числа сцен.",
+      "Контроль затрат: дозированный image-to-video и лимит расходов на задачу.",
+      "Комплаенс и безопасность: раскрытие AI-синтетики, анти-шаблонность, auth по умолчанию, фикс path traversal."
+    ],
+    "en": [
+      "An active fork of MoneyPrinterTurbo, rebuilt into a platform.",
+      "React front end over the REST API: Create, Library, Settings with an API-key gate.",
+      "Long-form mode: duration-driven chunked script, per-scene resume/idempotency, scene-count cap.",
+      "Cost governance: dosed image-to-video and a per-task spend cap.",
+      "Compliance and security: AI-synthetic disclosure, anti-templated output, auth on by default, path-traversal fix."
+    ]
+  }
+}
