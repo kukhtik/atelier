@@ -105,7 +105,7 @@ for (const page of pages) {
   writeFileSync(out, html);
 }
 
-writeFileSync(p(dist, "robots.txt"), "User-agent: *\nAllow: /\nSitemap: https://kukhtik.github.io/atelier/sitemap.xml\n");
+writeFileSync(p(dist, "robots.txt"), "User-agent: *\nAllow: /\nSitemap: https://kukhto.is-a.dev/atelier/sitemap.xml\n");
 
 const sizes = pages.map((pg) => `${pg.file} ${(readFileSync(p(dist, pg.file)).length / 1024).toFixed(1)} КБ`);
 console.log(`built ${pages.length} pages, css ${(Buffer.byteLength(css) / 1024).toFixed(1)} КБ, hash ${hash}`);

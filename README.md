@@ -2,7 +2,7 @@
 
 Второй личный сайт Максима Кухто: инженерное портфолио в графической грамматике бумажного архитектурного авангарда. Живёт параллельно с LCARS-консолью на `kukhto.is-a.dev`.
 
-- Живой сайт: https://kukhtik.github.io/atelier/
+- Живой сайт: https://kukhto.is-a.dev/atelier/
 - Дизайн-спека: `docs/superpowers/specs/2026-11-26-atelier-site-design.md`
 - План сборки: `docs/superpowers/plans/2026-11-26-atelier-site.md`
 - Приёмка (числа): `docs/acceptance-v1.md`

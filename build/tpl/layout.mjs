@@ -1,7 +1,7 @@
 // Каркас страницы: шапка, оси A–L, линейка, штамп, SEO (спека §11–12).
 import { escape, attr, assetHref, routeHref, pageFile } from "../lib/html.mjs";
 
-const SITE = "https://kukhtik.github.io/atelier/";
+const SITE = "https://kukhto.is-a.dev/atelier/";
 
 const NAV = [
   { route: "", key: "home", num: "00" },
