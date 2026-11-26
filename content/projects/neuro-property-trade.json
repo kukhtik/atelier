@@ -1,75 +1,67 @@
 {
-  "slug": "neuro-property-trade",
-  "index": "05",
-  "title": {
-    "ru": "Neuro Property Trade",
-    "en": "Neuro Property Trade"
-  },
-  "status": "prototype",
-  "years": null,
-  "confidentiality": {
-    "en": "Public code",
-    "ru": "Публичный код"
-  },
-  "summary": {
-    "ru": "Самостоятельная игра на Godot 4 с детерминированным движком правил: seeded RNG течёт через один класс, каждое действие идёт через append-only лог событий (полный replay), а ИИ-места (Neuro / Evil Neuro / человек) отправляют **интенты** — движок их валидирует и исполняет; ИИ не может испортить состояние. Оригинальный сеттинг, без чужих торговых марок.",
-    "en": "A standalone Godot 4 game with a deterministic rules engine: seeded RNG flows through one class, every action goes through an append-only event log (full replay), and AI seats (Neuro / Evil Neuro / human) submit **intents** that the engine validates and executes — the AI can never corrupt state. Original theme, no trademarked names."
-  },
-  "metrics": [
-    {
-      "name": {
-        "ru": "тестов движка",
-        "en": "engine tests"
-      },
-      "value": "161",
-      "note": ""
-    },
-    {
-      "name": {
-        "ru": "спецификаций e2e",
-        "en": "e2e specs"
-      },
-      "value": "89",
-      "note": ""
-    }
-  ],
-  "results": [],
-  "stack": "Godot 4.7 (GDScript) · headless-тестируемое ядро · адаптер Neuro SDK (WS-протокол действий)",
-  "link": "https://github.com/kukhtik/neuro-property-trade",
-  "context": {
-    "ru": [
-      {
-        "t": "p",
-        "v": "**Проблема.** Коммерческую настольную игру нельзя безопасно модифицировать для игры ИИ (анти-тампер, снятые с продажи версии, нет чистого доступа к состоянию). Чтобы ИИ-место играло честно, сама игра должна быть построена так, чтобы состоянием владел движок — а не ИИ."
-      },
-      {
-        "t": "p",
-        "v": "**Подход.** Самостоятельная игра на Godot 4 с детерминированным движком правил: seeded RNG течёт через один класс, каждое действие идёт через append-only лог событий (полный replay), а ИИ-места (Neuro / Evil Neuro / человек) отправляют **интенты** — движок их валидирует и исполняет; ИИ не может испортить состояние. Оригинальный сеттинг, без чужих торговых марок. Интерфейс параметрический (никаких захардкоженных 40 клеток): перекладка вживую под размер окна, RU/EN, светлая/тёмная тема, панель мест и журнал событий."
-      }
-    ],
-    "en": [
-      {
-        "t": "p",
-        "v": "**Problem.** A commercial board-game title can't be safely modded for AI play (anti-tamper, delisted versions, no clean state reads). To let an AI seat play fairly, the game itself must be built so the engine — not the AI — owns the state."
-      },
-      {
-        "t": "p",
-        "v": "**Approach.** A standalone Godot 4 game with a deterministic rules engine: seeded RNG flows through one class, every action goes through an append-only event log (full replay), and AI seats (Neuro / Evil Neuro / human) submit **intents** that the engine validates and executes — the AI can never corrupt state. Original theme, no trademarked names. The UI is parametric (no 40 hardcoded tiles): it relayouts live to the window size, RU/EN, light/dark theme, seats panel and event journal."
-      }
-    ]
-  },
-  "approach": {
-    "ru": [
-      "Самостоятельная игра на Godot 4 с детерминированным движком правил.",
-      "Seeded RNG течёт через один класс, каждое действие идёт через append-only лог событий с полным replay.",
-      "ИИ-места отправляют **интенты**, движок их валидирует и исполняет — состояние нельзя испортить.",
-      "Параметрический интерфейс: перекладка вживую под размер окна, RU/EN, светлая и тёмная тема."
-    ],
-    "en": [
-      "A standalone Godot 4 game with a deterministic rules engine.",
-      "Seeded RNG flows through one class; every action goes through an append-only event log with full replay.",
-      "AI seats submit **intents**; the engine validates and executes them, so the AI cannot corrupt state.",
-      "Parametric UI: live relayout to window size, RU/EN, light and dark theme."
-    ]
+ "slug": "neuro-property-trade",
+ "index": "05",
+ "title": {
+  "ru": "Neuro Property Trade",
+  "en": "Neuro Property Trade"
+ },
+ "status": "prototype",
+ "years": null,
+ "confidentiality": {
+  "en": "Public code",
+  "ru": "Публичный код"
+ },
+ "summary": {
+  "ru": "Самостоятельная игра на Godot 4 с детерминированным движком правил: seeded RNG течёт через один класс, каждое действие идёт через append-only лог событий (полный replay), а ИИ-места (Neuro / Evil Neuro / человек) отправляют **интенты** — движок их валидирует и исполняет; ИИ не может испортить состояние. Оригинальный сеттинг, без чужих торговых марок.",
+  "en": "A standalone Godot 4 game with a deterministic rules engine: seeded RNG flows through one class, every action goes through an append-only event log (full replay), and AI seats (Neuro / Evil Neuro / human) submit **intents** that the engine validates and executes — the AI can never corrupt state. Original theme, no trademarked names."
+ },
+ "metrics": [
+  {
+   "name": {
+    "ru": "тестов движка",
+    "en": "engine tests"
+   },
+   "value": "161",
+   "note": ""
   }
+ ],
+ "results": [],
+ "stack": "Godot 4.7 (GDScript) · headless-тестируемое ядро · адаптер Neuro SDK (WS-протокол действий)",
+ "link": "https://github.com/kukhtik/neuro-property-trade",
+ "context": {
+  "ru": [
+   {
+    "t": "p",
+    "v": "**Проблема.** Коммерческую настольную игру нельзя безопасно модифицировать для игры ИИ (анти-тампер, снятые с продажи версии, нет чистого доступа к состоянию). Чтобы ИИ-место играло честно, сама игра должна быть построена так, чтобы состоянием владел движок — а не ИИ."
+   },
+   {
+    "t": "p",
+    "v": "**Подход.** Самостоятельная игра на Godot 4 с детерминированным движком правил: seeded RNG течёт через один класс, каждое действие идёт через append-only лог событий (полный replay), а ИИ-места (Neuro / Evil Neuro / человек) отправляют **интенты** — движок их валидирует и исполняет; ИИ не может испортить состояние. Оригинальный сеттинг, без чужих торговых марок. Интерфейс параметрический (никаких захардкоженных 40 клеток): перекладка вживую под размер окна, RU/EN, светлая/тёмная тема, панель мест и журнал событий."
+   }
+  ],
+  "en": [
+   {
+    "t": "p",
+    "v": "**Problem.** A commercial board-game title can't be safely modded for AI play (anti-tamper, delisted versions, no clean state reads). To let an AI seat play fairly, the game itself must be built so the engine — not the AI — owns the state."
+   },
+   {
+    "t": "p",
+    "v": "**Approach.** A standalone Godot 4 game with a deterministic rules engine: seeded RNG flows through one class, every action goes through an append-only event log (full replay), and AI seats (Neuro / Evil Neuro / human) submit **intents** that the engine validates and executes — the AI can never corrupt state. Original theme, no trademarked names. The UI is parametric (no 40 hardcoded tiles): it relayouts live to the window size, RU/EN, light/dark theme, seats panel and event journal."
+   }
+  ]
+ },
+ "approach": {
+  "ru": [
+   "Самостоятельная игра на Godot 4 с детерминированным движком правил.",
+   "Seeded RNG течёт через один класс, каждое действие идёт через append-only лог событий с полным replay.",
+   "ИИ-места отправляют **интенты**, движок их валидирует и исполняет — состояние нельзя испортить.",
+   "Параметрический интерфейс: перекладка вживую под размер окна, RU/EN, светлая и тёмная тема."
+  ],
+  "en": [
+   "A standalone Godot 4 game with a deterministic rules engine.",
+   "Seeded RNG flows through one class; every action goes through an append-only event log with full replay.",
+   "AI seats submit **intents**; the engine validates and executes them, so the AI cannot corrupt state.",
+   "Parametric UI: live relayout to window size, RU/EN, light and dark theme."
+  ]
+ }
 }
