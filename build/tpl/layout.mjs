@@ -121,7 +121,7 @@ ${body}
       <div class="row"><span>${escape(t(site.ui.medium))}</span><b data-medium-name>VOID</b></div>
       <div class="row"><span>${escape(t(site.ui.sheet))}</span><b>01</b></div>
       <div class="row"><span>${lang === "ru" ? "СБОРКА" : "BUILD"}</span><b>v1.${escape(hash)}</b></div>
-      <div class="row"><span>${lang === "ru" ? "СТАТУС" : "STATUS"}</span><b>${escape(t(site.availability))}</b></div>
+      <div class="row"><span>${lang === "ru" ? "СТАТУС" : "STATUS"}</span><b data-avail>${escape(t(site.availability))}</b></div>
     </dl>
     ${revisionTable([["00", "00", "26.11"], ["01", String(1 + (hash.charCodeAt(0) % 8)).padStart(2, "0"), "27.11"]], lang)}
     ${scaleBar(lang)}
