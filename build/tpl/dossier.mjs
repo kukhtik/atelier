@@ -10,20 +10,13 @@ export function dossierPage(ctx, project, lang) {
   const t = (v) => (v && typeof v === "object" ? v[lang] || v.ru : v || "");
   const hasContext = Array.isArray(project.approach?.[lang]) && project.approach[lang].length > 0;
 
-  const metrics = (project.metrics || [])
-    .map(
-      (m) =>
-        `<tr><th scope="row">${escape(t(m.name))}</th><td>${escape(metricValue(m.value))}${
-          m.note ? ` <span class="meta">${escape(m.note)}</span>` : ""
-        }</td></tr>`
-    )
-    .join("");
-  const results = (project.results || [])
-    .map(
-      (r) =>
-        `<tr><th scope="row">${escape(t(r.label))}</th><td>${escape(metricValue(r.value))}</td></tr>`
-    )
-    .join("");
+  let pos = 0;
+  const row = (name, value, note) =>
+    `<tr><td class="pos">${String(++pos).padStart(2, "0")}</td><th scope="row">${escape(name)}</th><td>${escape(
+      value
+    )}${note ? ` <span class="meta">${escape(note)}</span>` : ""}</td></tr>`;
+  const metrics = (project.metrics || []).map((m) => row(t(m.name), metricValue(m.value), m.note)).join("");
+  const results = (project.results || []).map((r) => row(t(r.label), metricValue(r.value), "")).join("");
 
   const specTable = `<table class="spec"><caption>${
     lang === "ru" ? "СПЕЦИФИКАЦИЯ" : "SPECIFICATION"

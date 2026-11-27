@@ -350,3 +350,24 @@ li { margin-bottom: .4em; }
 .node:focus-visible circle { stroke: var(--accent-primary); stroke-width: 2; }
 .edge.is-active { stroke: var(--accent-primary); opacity: 1; }
 .graph[data-dim="1"] .edge { opacity: .35; }
+
+/* титульный лист: рисунок во всю ширину */
+.hero-text { grid-column: 1 / -1; }
+.hero-side { grid-column: 1 / -1; display: grid; gap: var(--s-1); margin-top: var(--s-5); }
+.hero-side p { margin: 0; }
+.hero-sheet {
+  grid-column: 1 / -1;
+  margin: var(--s-6) 0 0;
+  border: var(--line-hair) solid var(--line-structural);
+  background: var(--surface);
+  padding: var(--s-3);
+}
+.hero-sheet svg { display: block; width: 100%; height: auto; }
+@media (min-width: 1200px) {
+  .hero-text { grid-column: 1 / span 7; }
+  .hero-side { grid-column: 9 / span 4; margin-top: 0; align-content: start; }
+}
+
+.spec .pos { width: 34px; color: var(--fg-secondary); font-family: var(--font-mono); font-size: var(--t-11-31); }
+.spec th[scope="row"] { width: auto; }
+.ax-note { font-size: 9px; letter-spacing: .04em; opacity: .9; }

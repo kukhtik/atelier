@@ -1,67 +1,172 @@
-// Главный экран: имя, манифест, каркасная сфера в изометрии, три планшета (спека §11).
+// Главный экран: титульный лист — реконструкция Института библиотековедения
+// И. Леонидова (башня книгохранилища + сфера-планетарий): веса линий, оконные
+// пояса, пьедестал, размерные засечки, две фигуры масштаба, ось 23,5°.
 import { escape, attr, routeHref } from "../lib/html.mjs";
 import { plateCard } from "../lib/plate.mjs";
 
-function sphereSvg() {
-  const r = 168, cx = 250, cy = 232;
-  const kx = 0.866, ky = 0.5;
-  const p = (x, y, z) => [cx + (x - y) * kx, cy + (x + y) * ky - z];
-  const poly = (pts) =>
-    "M" + pts.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L") + "";
-  const out = [];
-  for (const lat of [-60, -40, -20, 0, 20, 40, 60]) {
-    const z = r * Math.sin((lat * Math.PI) / 180);
-    const rc = r * Math.cos((lat * Math.PI) / 180);
-    const pts = [];
-    for (let i = 0; i <= 60; i++) {
-      const t = (i / 60) * Math.PI * 2;
-      pts.push(p(rc * Math.cos(t), rc * Math.sin(t), z));
-    }
-    out.push(
-      `<path d="${poly(pts)}" fill="none" stroke="var(--line-structural)" stroke-width="1" stroke-opacity="${
-        lat === 0 ? 0.9 : 0.45
-      }" vector-effect="non-scaling-stroke"/>`
+const W = 1200, H = 700, GY = 618;
+
+function leader(x1, y1, x2, y2) {
+  return `<path d="M${x1} ${y1} L${x2} ${y2}" stroke="var(--line-structural)" stroke-width="1"/><circle cx="${x1}" cy="${y1}" r="2.8" fill="var(--fg-primary)"/>`;
+}
+
+/** Засечка размерной линии под 45°, как в строительных чертежах */
+function tick(x, y) {
+  return `<path d="M${x - 5} ${y + 5} L${x + 5} ${y - 5}" stroke="var(--fg-primary)" stroke-width="1.2"/>`;
+}
+
+function institute(lang) {
+  const towerX = 300, towerW = 130, towerTop = 196;
+  const sph = { cx: 828, cy: 322, r: 168 };
+
+  // этажи: двойные линии (плита + окно)
+  const floors = [];
+  const n = 12;
+  const step = (GY - 30 - towerTop) / n;
+  for (let i = 1; i < n; i++) {
+    const y = towerTop + step * i;
+    floors.push(
+      `<line x1="${towerX}" y1="${y.toFixed(1)}" x2="${towerX + towerW}" y2="${y.toFixed(1)}" stroke="var(--fg-primary)" stroke-width="1.6"/>`,
+      `<line x1="${towerX}" y1="${(y + 4).toFixed(1)}" x2="${towerX + towerW}" y2="${(y + 4).toFixed(1)}" stroke="var(--line-structural)" stroke-width="0.8"/>`
     );
   }
-  for (let lon = 0; lon < 180; lon += 30) {
-    const f = (lon * Math.PI) / 180;
-    const pts = [];
-    for (let i = 0; i <= 48; i++) {
-      const th = (i / 48) * Math.PI * 2;
-      pts.push(p(r * Math.sin(th) * Math.cos(f), r * Math.sin(th) * Math.sin(f), r * Math.cos(th)));
-    }
-    out.push(
-      `<path d="${poly(pts)}" fill="none" stroke="var(--line-structural)" stroke-width="1" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>`
-    );
+  // вертикальные импосты окон
+  const mullions = [];
+  for (let x = towerX + 16; x < towerX + towerW; x += 16) {
+    mullions.push(`<line x1="${x}" y1="${towerTop + 6}" x2="${x}" y2="${GY - 30}" stroke="var(--line-structural)" stroke-width="0.7" stroke-opacity=".8"/>`);
   }
-  // оси: Z вертикально, X и Y под 30°
-  const axes = [
-    [`M${cx} ${cy + r + 26} L${cx} ${cy - r - 26}`, "var(--line-structural)"],
-    [`M${cx - r * 0.9} ${cy + r * 0.52} L${cx + r * 0.9} ${cy - r * 0.52}`, "var(--line-grid-decor)"],
-    [`M${cx - r * 0.9} ${cy - r * 0.52} L${cx + r * 0.9} ${cy + r * 0.52}`, "var(--line-grid-decor)"],
-  ]
-    .map(
-      ([d, c]) =>
-        `<path d="${d}" fill="none" stroke="${c}" stroke-width="1" stroke-dasharray="12 4 2 4" vector-effect="non-scaling-stroke"/>`
-    )
-    .join("");
 
-  const nodes = [
-    [p(r * 0.62, -r * 0.5, r * 0.6), "var(--taut-emerald)"],
-    [p(-r * 0.7, r * 0.35, -r * 0.45), "var(--taut-cobalt)"],
-    [p(-r * 0.1, -r * 0.8, -r * 0.58), "var(--taut-ruby)"],
-  ]
-    .map(([[x, y], c]) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.2" fill="${c}"/>`)
-    .join("");
+  // мачты с раскосами
+  const masts = `<path d="M${towerX + 26} ${towerTop} L${towerX + 26} 66 M${towerX + 96} ${towerTop} L${towerX + 96} 88" stroke="var(--fg-primary)" stroke-width="1.6" fill="none"/>` +
+    [0, 1, 2, 3].map((i) => {
+      const y1 = towerTop - 34 - i * 26, y2 = y1 + 12;
+      const x1 = towerX + 26, x2 = towerX + 96;
+      return `<path d="M${x1} ${y1} L${x2} ${y2}" stroke="var(--line-structural)" stroke-width="1"/><path d="M${x2} ${y1} L${x1} ${y2}" stroke="var(--line-structural)" stroke-width="1"/>`;
+    }).join("") +
+    `<path d="M${towerX + 26} 66 L${towerX + 96} 66 M${towerX + 26} 88 L${towerX + 96} 88" stroke="var(--fg-primary)" stroke-width="1"/>`;
 
-  return `<svg viewBox="0 0 500 500" role="img" aria-labelledby="sphere-title" xmlns="http://www.w3.org/2000/svg">
-<title id="sphere-title">${
-    "Каркасная сфера в изометрии — референс Леонидова"
-  }</title>
-<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--fg-secondary)" stroke-width="1" vector-effect="non-scaling-stroke"/>
-${out.join("")}
-${axes}
-${nodes}
+  // сфера: оболочка, пояса, меридиан
+  const lat = [-0.66, -0.36, 0.36, 0.66].map((k) => {
+    const dy = sph.r * k;
+    const rx = Math.sqrt(sph.r * sph.r - dy * dy);
+    return `<ellipse cx="${sph.cx}" cy="${(sph.cy + dy).toFixed(1)}" rx="${rx.toFixed(1)}" ry="${(rx * 0.16).toFixed(1)}" fill="none" stroke="var(--line-structural)" stroke-width="0.9"/>`;
+  }).join("");
+  const sphere = `<circle cx="${sph.cx}" cy="${sph.cy}" r="${sph.r}" fill="url(#sphLight)" stroke="var(--fg-primary)" stroke-width="2.2"/>` +
+    `<ellipse cx="${sph.cx}" cy="${sph.cy}" rx="${sph.r}" ry="${(sph.r * 0.27).toFixed(1)}" fill="none" stroke="var(--fg-primary)" stroke-width="1.3"/>` +
+    `<ellipse cx="${sph.cx}" cy="${sph.cy}" rx="${(sph.r * 0.3).toFixed(1)}" ry="${sph.r}" fill="none" stroke="var(--fg-primary)" stroke-width="1" stroke-opacity=".7"/>` +
+    lat;
+
+  // пьедестал сферы и лестница
+  const base = `<path d="M${sph.cx - 46} ${sph.cy + sph.r - 6} L${sph.cx + 46} ${sph.cy + sph.r - 6} L${sph.cx + 30} ${GY} L${sph.cx - 30} ${GY} Z" fill="none" stroke="var(--fg-primary)" stroke-width="1.6"/>` +
+    [0, 1, 2].map((i) => `<line x1="${sph.cx - 30 - i * 12}" y1="${GY - 4 - i * 4}" x2="${sph.cx + 30 + i * 12}" y2="${GY - 4 - i * 4}" stroke="var(--line-structural)" stroke-width="1"/>`).join("");
+
+  // плита башни и ступени
+  const plinth = `<rect x="${towerX - 16}" y="${GY - 14}" width="${towerW + 32}" height="14" fill="none" stroke="var(--fg-primary)" stroke-width="1.6"/>` +
+    `<path d="M${towerX - 26} ${GY} L${towerX + towerW + 26} ${GY}" stroke="var(--fg-primary)" stroke-width="1.2"/>`;
+
+  // мост башня — сфера
+  const bridge = `<path d="M${towerX + towerW} 292 L660 306 L660 352 L${towerX + towerW} 340 Z" fill="none" stroke="var(--fg-primary)" stroke-width="1.6"/>` +
+    [0, 1, 2, 3].map((i) => `<line x1="${towerX + towerW + 40 + i * 56}" y1="${296 + i * 3}" x2="${towerX + towerW + 40 + i * 56}" y2="${338 - i * 2}" stroke="var(--line-structural)" stroke-width="0.9"/>`).join("");
+
+  // земля
+  const hatches = [];
+  for (let x = 80; x <= 1120; x += 24) hatches.push(`<path d="M${x} ${GY} l-12 12" stroke="var(--line-structural)" stroke-width="0.9"/>`);
+  const ground = `<line x1="64" y1="${GY}" x2="1136" y2="${GY}" stroke="var(--fg-primary)" stroke-width="1.8"/>${hatches.join("")}`;
+
+  // оси
+  const axes = `<path d="M365 50 L365 672" stroke="var(--line-structural)" stroke-width="1" stroke-dasharray="12 4 2 4"/>` +
+    `<path d="M540 322 L1088 322" stroke="var(--line-structural)" stroke-width="1" stroke-dasharray="12 4 2 4"/>`;
+
+  // ось 23,5° (Татлин) через центр сферы + дуга угла
+  const ang = (23.5 * Math.PI) / 180;
+  const len = 520;
+  const ax2 = sph.cx + Math.cos(ang) * len * 0.95, ay2 = sph.cy - Math.sin(ang) * len;
+  const axis23 = `<path d="M${sph.cx - Math.cos(ang) * 300} ${(sph.cy + Math.sin(ang) * 300).toFixed(1)} L${ax2.toFixed(1)} ${ay2.toFixed(1)}" stroke="var(--accent-primary)" stroke-width="1.2" stroke-dasharray="16 6" opacity=".9"/>` +
+    `<path d="M${sph.cx} ${sph.cy - 70} A70 70 0 0 1 ${(sph.cx + Math.sin(ang) * 70).toFixed(1)} ${(sph.cy - Math.cos(ang) * 70).toFixed(1)}" fill="none" stroke="var(--accent-primary)" stroke-width="1"/>` +
+    `<text x="${(sph.cx + 78).toFixed(0)}" y="${(sph.cy - 46).toFixed(0)}" class="ax-label" fill="var(--accent-primary)">23,5°</text>`;
+
+  // размеры с засечками
+  const dims = `<path d="M1016 ${towerTop} L1016 ${GY}" stroke="var(--line-structural)" stroke-width="1"/>` +
+    tick(1016, towerTop) + tick(1016, GY) +
+    `<path d="M${towerX + towerW} ${towerTop} L1022 ${towerTop}" stroke="var(--line-structural)" stroke-width="0.8" stroke-dasharray="4 4"/>` +
+    `<text x="1030" y="${(GY + towerTop) / 2}" class="ax-label" fill="var(--fg-secondary)">H</text>` +
+    `<path d="M${sph.cx - sph.r} 592 L${sph.cx + sph.r} 592" stroke="var(--line-structural)" stroke-width="1"/>` +
+    tick(sph.cx - sph.r, 592) + tick(sph.cx + sph.r, 592) +
+    `<text x="${sph.cx}" y="584" text-anchor="middle" class="ax-label" fill="var(--fg-secondary)">D</text>`;
+
+  // фигуры масштаба: у башни и у сферы
+  const fig = (x, h) => `<g stroke="var(--fg-primary)" stroke-width="1.5" fill="none" transform="translate(${x} ${GY}) scale(${(h / 26).toFixed(2)})">` +
+    `<circle cx="0" cy="-22" r="4"/><path d="M0 -18 L0 -8 M0 -8 L-4 0 M0 -8 L4 0 M-4 -14 L4 -14"/></g>`;
+  const human = fig(472, 26) + fig(700, 26) +
+    `<path d="M478 ${GY - 30} L512 ${GY - 30}" stroke="var(--line-structural)" stroke-width="1"/>` +
+    `<text x="516" y="${GY - 26}" class="ax-label" fill="var(--fg-secondary)">1:1000</text>`;
+
+  // выноски
+  const labels = leader(towerX - 6, 330, 200, 330) + leader(sph.cx + 110, 430, 1030, 470) + leader(792, 196, 726, 132) +
+    `<text x="116" y="324" class="ax-label" fill="var(--fg-primary)">${lang === "ru" ? "КНИГОХРАНИЛИЩЕ" : "BOOK STACK"}</text>` +
+    `<text x="1034" y="474" class="ax-label" fill="var(--fg-primary)">${lang === "ru" ? "АУДИТОРИЯ" : "AUDITORIUM"}</text>` +
+    `<text x="730" y="128" class="ax-label" fill="var(--fg-secondary)">${lang === "ru" ? "ОБОЛОЧКА" : "SHELL"}</text>`;
+
+
+  // малый план: след башни и круг сферы
+  const plan = `<g class="plan" transform="translate(96 452)">
+    <rect x="0" y="0" width="196" height="132" fill="none" stroke="var(--line-structural)" stroke-width="1" stroke-dasharray="6 4"/>
+    <rect x="18" y="24" width="46" height="84" fill="none" stroke="var(--fg-primary)" stroke-width="1.4"/>
+    ${[0,1,2,3].map((i)=>`<line x1="26" y1="${34+i*19}" x2="56" y2="${34+i*19}" stroke="var(--line-structural)" stroke-width="0.8"/>`).join("")}
+    <circle cx="128" cy="66" r="38" fill="none" stroke="var(--fg-primary)" stroke-width="1.6"/>
+    <circle cx="128" cy="66" r="22" fill="none" stroke="var(--line-structural)" stroke-width="0.8"/>
+    <line x1="128" y1="14" x2="128" y2="118" stroke="var(--line-structural)" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>
+    <line x1="76" y1="66" x2="180" y2="66" stroke="var(--line-structural)" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>
+    <text x="0" y="-8" class="ax-label" fill="var(--fg-secondary)">${lang === "ru" ? "ПЛАН" : "PLAN"}</text>
+    <text x="0" y="148" class="ax-label" fill="var(--fg-secondary)">1:2000</text>
+  </g>`;
+
+  // штриховка ядра башни
+  const coreHatch = [];
+  for (let i = 0; i < 26; i++) {
+    const y = towerTop + 8 + i * 14;
+    if (y > GY - 40) break;
+    coreHatch.push(`<line x1="${towerX + 54}" y1="${y}" x2="${towerX + 76}" y2="${y - 12}" stroke="var(--line-structural)" stroke-width="0.8" clip-path="url(#towerClip)"/>`);
+  }
+  const hatch = `<clipPath id="towerClip"><rect x="${towerX}" y="${towerTop}" width="${towerW}" height="${GY - 30 - towerTop}"/></clipPath>${coreHatch.join("")}`;
+
+  // дуга построения радиуса сферы
+  const construction = `<circle cx="${sph.cx}" cy="${sph.cy}" r="${(sph.r * 1.22).toFixed(1)}" fill="none" stroke="var(--line-grid-decor)" stroke-width="1" stroke-dasharray="2 7"/>`;
+
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="sheet-title" xmlns="http://www.w3.org/2000/svg">
+<title id="sheet-title">${lang === "ru"
+    ? "Реконструкция: Институт библиотековедения им. Ленина, Иван Леонидов, 1927 — башня книгохранилища и сфера-планетарий"
+    : "Reconstruction: Lenin Institute of Librarianship, Ivan Leonidov, 1927 — book tower and planetarium sphere"}</title>
+<defs>
+  <radialGradient id="sphLight" cx="36%" cy="30%" r="72%">
+    <stop offset="0%" stop-color="currentColor" stop-opacity=".12"/>
+    <stop offset="65%" stop-color="currentColor" stop-opacity=".03"/>
+    <stop offset="100%" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+    <feGaussianBlur stdDeviation="1.2" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<g filter="url(#glow)" style="color: var(--fg-primary)">
+  ${ground}
+  ${plinth}
+  <rect x="${towerX}" y="${towerTop}" width="${towerW}" height="${GY - 30 - towerTop}" fill="none" stroke="var(--fg-primary)" stroke-width="2"/>
+  ${floors.join("")}
+  ${mullions.join("")}
+  ${masts}
+  ${base}
+  ${sphere}
+  ${bridge}
+  ${axes}
+  ${construction}
+  ${axis23}
+  ${hatch}
+  ${plan}
+  ${dims}
+  ${human}
+  ${labels}
+</g>
 </svg>`;
 }
 
@@ -76,23 +181,29 @@ export function homePage(ctx, lang) {
 
   const preview = projects.slice(0, 3).map((p) => `<div class="c-third">${plateCard(ctx, p, lang, { compact: true })}</div>`).join("");
 
-  return `<section class="hero grid" id="s-00">
-  <div class="hero-text">
-    <p class="hero-role">${escape(role)} · ${escape(loc)}</p>
-    <h1 class="hero-id">${escape(name)}</h1>
-    <div class="hero-manifest prose">
-      ${lead ? `<p>${escape(lead)}</p>` : ""}
-      ${manifest.filter(Boolean).map((m) => `<p>${escape(m)}</p>`).join("")}
+  return `<section class="hero" id="s-00">
+  <div class="grid">
+    <div class="hero-text">
+      <p class="hero-role">${escape(role)} · ${escape(loc)}</p>
+      <h1 class="hero-id">${escape(name)}</h1>
+      <div class="hero-manifest prose">
+        ${lead ? `<p>${escape(lead)}</p>` : ""}
+        ${manifest.filter(Boolean).map((m) => `<p>${escape(m)}</p>`).join("")}
+      </div>
     </div>
-    <p class="dwg dwg--lg">${escape(t(site.availability))} · UTC+3</p>
+    <div class="hero-side">
+      <p class="dwg dwg--lg">${escape(t(site.availability))} · UTC+3</p>
+      <p class="dwg">${lang === "ru" ? "ЛИСТ 00 · ТИТУЛЬНЫЙ" : "SHEET 00 · TITLE"}</p>
+      <p class="dwg">${lang === "ru" ? "ПО ЧЕРТЕЖУ 1927 ГОДА" : "AFTER THE 1927 SHEET"}</p>
+    </div>
+    <figure class="hero-sheet">
+      ${institute(lang)}
+      <figcaption class="coords">
+        <span id="coords">X 0000 · Y 0000</span>
+        <span>${lang === "ru" ? "ИНСТИТУТ БИБЛИОТЕКОВЕДЕНИЯ · И. ЛЕОНИДОВ · 1927" : "LENIN INSTITUTE · I. LEONIDOV · 1927"}</span>
+      </figcaption>
+    </figure>
   </div>
-  <figure class="hero-figure">
-    ${sphereSvg()}
-    <figcaption class="coords" aria-hidden="true">
-      <span id="coords">X 0000 · Y 0000</span>
-      <span>ISO 35.264° · Z 1:1</span>
-    </figcaption>
-  </figure>
 </section>
 
 <section class="section" id="s-02">
