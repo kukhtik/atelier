@@ -102,6 +102,77 @@ function institute(lang) {
     `<text x="10" y="-4" class="ax-label" fill="var(--fg-secondary)">${label}</text></g>`;
   const human = fig(470, 34, "1:1000") + fig(636, 30, "");
 
+
+  // ---- детали листа: лестница, ограждение, цепочка размеров, метки разреза, север ----
+  const stairs = [];
+  for (let i = 0; i < 7; i++) {
+    const y = GY - 4 - i * 5;
+    stairs.push(`<path d="M${towerX - 26 - i * 6} ${y} L${towerX - 4} ${y}" stroke="var(--fg-primary)" stroke-width="1"/>`);
+  }
+  const stairStringer = `<path d="M${towerX - 66} ${GY - 2} L${towerX - 4} ${GY - 38}" stroke="var(--fg-secondary)" stroke-width="1"/>`;
+  const rail = [];
+  for (let x = towerX - 14; x <= towerX + towerW + 14; x += 7) {
+    rail.push(`<path d="M${x} ${GY - 16} L${x} ${GY - 10}" stroke="var(--line-structural)" stroke-width="0.8"/>`);
+  }
+  const railing = `<path d="M${towerX - 14} ${GY - 16} L${towerX + towerW + 14} ${GY - 16}" stroke="var(--fg-secondary)" stroke-width="1"/>${rail.join("")}`;
+
+  const chainY = GY + 34;
+  const chainX = [towerX - 16, 470, 560, 660, 760, 900, sph.cx + sph.r];
+  const chain = `<path d="M${chainX[0]} ${chainY} L${chainX[chainX.length - 1]} ${chainY}" stroke="var(--line-structural)" stroke-width="1"/>` +
+    chainX.map((x, i) => tick(x, chainY) +
+      `<text x="${x + 4}" y="${chainY + 12}" class="ax-label" fill="var(--fg-secondary)">${String.fromCharCode(65 + i)}</text>`).join("") +
+    [0, 1, 2, 3, 4, 5].map((i) => {
+      const mid = (chainX[i] + chainX[i + 1]) / 2;
+      return `<text x="${mid}" y="${chainY - 5}" text-anchor="middle" class="ax-label" fill="var(--fg-secondary)" opacity=".7">${i + 1}</text>`;
+    }).join("");
+
+  const sectionMarks =
+    `<g class="det" style="--d:.9s">` +
+    `<path d="M357 172 L357 196" stroke="var(--fg-primary)" stroke-width="3"/>` +
+    `<path d="M373 172 L373 196" stroke="var(--fg-primary)" stroke-width="1"/>` +
+    `<text x="334" y="188" class="ax-label" fill="var(--fg-primary)">А</text>` +
+    `<path d="M357 184 L318 184" stroke="var(--line-structural)" stroke-width="1"/><path d="M322 180 L316 184 L322 188" fill="none" stroke="var(--line-structural)" stroke-width="1"/>` +
+    `<path d="M357 ${GY + 2} L357 ${GY + 20}" stroke="var(--fg-primary)" stroke-width="3"/>` +
+    `<path d="M373 ${GY + 2} L373 ${GY + 20}" stroke="var(--fg-primary)" stroke-width="1"/>` +
+    `<text x="334" y="${GY + 16}" class="ax-label" fill="var(--fg-primary)">А</text>` +
+    `<text x="380" y="${GY + 18}" class="ax-label" fill="var(--fg-secondary)">А—А</text></g>`;
+
+  const north = `<g class="det" style="--d:1s" transform="translate(150 556)">` +
+    `<circle r="17" fill="none" stroke="var(--line-structural)" stroke-width="1"/>` +
+    `<path d="M0 10 L0 -11" stroke="var(--fg-primary)" stroke-width="1.2"/>` +
+    `<path d="M0 -13 L-4 -5 L0 -8 L4 -5 Z" fill="var(--fg-primary)"/>` +
+    `<text x="0" y="4" text-anchor="middle" class="ax-label" fill="var(--fg-secondary)">С</text></g>`;
+
+  const shadowHatch = [];
+  for (let i = 0; i < 16; i++) {
+    const x = 742 + i * 11;
+    shadowHatch.push(`<path d="M${x} ${GY} L${x - 26} ${GY - 26}" stroke="var(--line-grid-decor)" stroke-width="1"/>`);
+  }
+  const shadow = `<g class="det" style="--d:.7s">${shadowHatch.join("")}</g>`;
+
+
+  // примечания и выносная деталь узла
+  const notes = `<g class="det" style="--d:1.15s">
+    <path d="M80 176 L250 176" stroke="var(--line-structural)" stroke-width="1"/>
+    <text x="80" y="168" class="ax-label" fill="var(--fg-secondary)">${lang === "ru" ? "ПРИМЕЧАНИЯ" : "NOTES"}</text>
+    <text x="80" y="194" class="ax-label" fill="var(--fg-secondary)">1. ${lang === "ru" ? "РАЗМЕРЫ УСЛОВНЫЕ" : "DIMENSIONS SCHEMATIC"}</text>
+    <text x="80" y="210" class="ax-label" fill="var(--fg-secondary)">2. ${lang === "ru" ? "ПРОЕКЦИЯ АКСОНОМЕТРИЧЕСКАЯ" : "AXONOMETRIC PROJECTION"}</text>
+    <text x="80" y="226" class="ax-label" fill="var(--fg-secondary)">3. ${lang === "ru" ? "ЛИНИИ ПО ISO 128" : "LINES PER ISO 128"}</text>
+    <text x="80" y="242" class="ax-label" fill="var(--fg-secondary)">4. ${lang === "ru" ? "МАСШТАБ 1:1000" : "SCALE 1:1000"}</text>
+  </g>`;
+
+  const detailBox = `<g class="det" style="--d:1.3s">
+    <rect x="946" y="96" width="176" height="118" fill="none" stroke="var(--line-structural)" stroke-width="1"/>
+    <text x="946" y="88" class="ax-label" fill="var(--fg-secondary)">${lang === "ru" ? "ДЕТАЛЬ Д1" : "DETAIL D1"}</text>
+    <path d="M962 168 L1074 168 M962 176 L1074 176" stroke="var(--fg-primary)" stroke-width="1.6"/>
+    <path d="M962 152 L1074 152 M962 160 L1074 160" stroke="var(--fg-primary)" stroke-width="1"/>
+    ${[0,1,2,3,4].map((i)=>`<path d="M${970+i*24} 148 L${958+i*24} 172" stroke="var(--line-structural)" stroke-width="1"/>`).join("")}
+    <text x="1062" y="140" class="ax-label" fill="var(--fg-secondary)">1:10</text>
+    <path d="M946 158 L716 214" stroke="var(--fg-secondary)" stroke-width="1" stroke-dasharray="6 4"/>
+    <circle cx="716" cy="214" r="9" fill="none" stroke="var(--accent-primary)" stroke-width="1.2"/>
+    <text x="728" y="218" class="ax-label" fill="var(--accent-primary)">Д1</text>
+  </g>`;
+
   // выноски
   const labels = leader(towerX - 6, 330, 200, 330) + leader(sph.cx + 110, 430, 1030, 470) + leader(792, 196, 726, 132) +
     `<text x="116" y="324" class="ax-label" fill="var(--fg-primary)">${lang === "ru" ? "КНИГОХРАНИЛИЩЕ" : "BOOK STACK"}</text>` +
@@ -167,6 +238,15 @@ function institute(lang) {
   ${dims}
   ${human}
   ${labels}
+  ${stairs.join("")}
+  ${stairStringer}
+  ${railing}
+  ${chain}
+  ${sectionMarks}
+  ${north}
+  ${shadow}
+  ${notes}
+  ${detailBox}
 </g>
 </svg>`;
 }

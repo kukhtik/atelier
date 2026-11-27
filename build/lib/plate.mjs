@@ -47,6 +47,16 @@ export function plateCard(ctx, project, lang, opts = {}) {
       )
       .join("")}
   </dl>
+  <div class="plate-micro">
+    ${String(project.stack || "")
+      .split(/[·+]/)
+      .map((x) => x.trim())
+      .filter(Boolean)
+      .slice(0, 3)
+      .map((t, i) => `<p style="--d:${i * 40}ms"><span>${escape(String(i + 1).padStart(2, "0"))}</span>${escape(t)}</p>`)
+      .join("")}
+    <div class="plate-scale" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
   <a class="plate-open" href="${attr(href)}"><span>${openLabel}</span><span aria-hidden="true">↗</span></a>
 </article>`;
 }

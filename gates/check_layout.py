@@ -9,6 +9,7 @@ JS = """() => {
   const de = document.documentElement, bad = [];
   if (de.scrollWidth > de.clientWidth + 1) bad.push('overflow ' + de.scrollWidth + '>' + de.clientWidth);
   for (const el of document.querySelectorAll('p,li,h1,h2,h3,td,th,dd,dt,span,a,code')) {
+    if (el.closest('[aria-hidden="true"]')) continue;   // декоративная графика (линейки, метки)
     const cs = getComputedStyle(el);
     if (cs.overflow === 'visible' && el.scrollWidth > el.clientWidth + 1 && el.clientWidth > 0)
       bad.push('clip ' + el.tagName + '.' + (el.className || '') + ' ' + el.scrollWidth + '>' + el.clientWidth);

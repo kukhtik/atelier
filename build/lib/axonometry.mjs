@@ -48,6 +48,7 @@ export function axonometry(project, stack, opts = {}) {
 
   const parts = [];
   const labelParts = [];
+  const centers = [];
 
   layers.forEach((layer, i) => {
     const z = i * GAP;
@@ -77,6 +78,8 @@ export function axonometry(project, stack, opts = {}) {
         .map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`)
         .join(" ");
       modules.push(`<polygon points="${corners}" fill="var(--bg)" stroke="var(--fg-primary)" stroke-width="1"/>`);
+      const c = p(mx + size / 2, my + size / 2, z + T);
+      (centers[i] = centers[i] || []).push(c);
     }
 
     parts.push(
@@ -109,6 +112,17 @@ export function axonometry(project, stack, opts = {}) {
       );
     }
   });
+
+  // связи между слоями: от модуля к ближайшему модулю выше
+  const links = [];
+  for (let i = 0; i < centers.length - 1; i++) {
+    const lower = centers[i] || [], upper = centers[i + 1] || [];
+    for (const a of lower) {
+      let best = null, bd = 1e9;
+      for (const b of upper) { const d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (d < bd) { bd = d; best = b; } }
+      if (best) links.push(`<path d="M${a[0].toFixed(1)} ${a[1].toFixed(1)} L${best[0].toFixed(1)} ${best[1].toFixed(1)}" stroke="var(--line-structural)" stroke-width="1" stroke-dasharray="${compact ? "2 3" : "4 3"}" opacity=".8"/>`);
+    }
+  }
 
   const guides = [[0, 0], [W, 0], [W, D], [0, D]].map(([gx, gy]) => {
     const a = p(gx, gy, -10), b = p(gx, gy, (n - 1) * GAP + T + 14);
@@ -157,6 +171,7 @@ export function axonometry(project, stack, opts = {}) {
     )}</title>` +
     `<defs><pattern id="${uid}-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">` +
     `<line x1="0" y1="0" x2="0" y2="5" stroke="var(--fg-secondary)" stroke-width="1" stroke-opacity=".55"/></pattern></defs>` +
+    links.join("") +
     guides +
     bolts.join("") +
     spine +

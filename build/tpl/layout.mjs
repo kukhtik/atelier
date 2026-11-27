@@ -1,5 +1,6 @@
 // Каркас страницы: шапка, оси A–L, линейка, штамп, SEO (спека §11–12).
 import { escape, attr, assetHref, routeHref, pageFile } from "../lib/html.mjs";
+import { topRuler, leftRuler, cropMarks, marginalia, revisionTable, scaleBar } from "../lib/furniture.mjs";
 
 const SITE = "https://kukhto.is-a.dev/atelier/";
 
@@ -10,6 +11,16 @@ const NAV = [
   { route: "stack", key: "stack", num: "03" },
   { route: "contact", key: "contact", num: "05" },
 ];
+
+function courseName(route) {
+  if (!route) return "00";
+  if (route.startsWith("work/")) return "02";
+  if (route === "work") return "02";
+  if (route === "about") return "01";
+  if (route === "stack") return "03";
+  if (route === "contact") return "05";
+  return "00";
+}
 
 function label(site, key, lang) {
   if (key === "home") return lang === "ru" ? "ГЛАВНАЯ" : "HOME";
@@ -82,6 +93,10 @@ export function renderPage(ctx, { lang, route, title, description, body, pageKey
 <body class="page-${attr(pageKey)}">
 <a class="skip" href="#main">${lang === "ru" ? "К содержанию" : "Skip to content"}</a>
 <div class="sheet-frame" aria-hidden="true"></div>
+${cropMarks()}
+${topRuler()}
+${leftRuler()}
+${marginalia(`${lang === "ru" ? "АТЕЛЬЕ" : "ATELIER"} · ${escape(courseName(route))} · ${escape(t(site.ui.scale))}`)}
 <div class="grain" aria-hidden="true"></div>
 <div class="sheet">
   <header class="masthead">
@@ -89,6 +104,12 @@ export function renderPage(ctx, { lang, route, title, description, body, pageKey
     <nav class="nav" aria-label="${lang === "ru" ? "Разделы" : "Sections"}">${nav}</nav>
     <div class="lang" aria-label="${lang === "ru" ? "Язык" : "Language"}">${langSwitch}</div>
   </header>
+  <div class="meta-strip dwg">
+    <span>${lang === "ru" ? "ЛИСТ" : "SHEET"} ${courseName(route)}/05</span>
+    <span>${lang === "ru" ? "РЕВ" : "REV"} 01</span>
+    <span>${lang === "ru" ? "СБОРКА" : "BUILD"} v1.${escape(hash)}</span>
+    <span>${lang === "ru" ? "38 ЛИСТОВ · RU/EN" : "38 SHEETS · RU/EN"}</span>
+  </div>
   <div class="axes" aria-hidden="true">${axes}</div>
   <aside class="ruler" aria-hidden="true"><ol>${ruler}</ol></aside>
   <main id="main">
@@ -102,6 +123,8 @@ ${body}
       <div class="row"><span>${lang === "ru" ? "СБОРКА" : "BUILD"}</span><b>v1.${escape(hash)}</b></div>
       <div class="row"><span>${lang === "ru" ? "СТАТУС" : "STATUS"}</span><b>${escape(t(site.availability))}</b></div>
     </dl>
+    ${revisionTable([["00", "00", "26.11"], ["01", String(1 + (hash.charCodeAt(0) % 8)).padStart(2, "0"), "27.11"]], lang)}
+    ${scaleBar(lang)}
     <div class="mediums" role="group" aria-label="${lang === "ru" ? "Носитель" : "Medium"}">
       <button type="button" data-medium-set="void" aria-pressed="true">VOID</button>
       <button type="button" data-medium-set="cyanotype" aria-pressed="false">CYAN</button>
