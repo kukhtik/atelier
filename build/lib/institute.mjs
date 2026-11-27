@@ -2,7 +2,7 @@
 // Всё генерируется циклами; целевая плотность — тысячи линий, не десятки.
 import { escape } from "./html.mjs";
 
-const W = 1600, H = 1080;
+const W = 1600, H = 1120;
 const GY = 742;            // уровень земли
 const T = { x1: 252, x2: 392, top: 168, floors: 15 };
 const S = { cx: 596, cy: 452, r: 168 };
@@ -223,7 +223,7 @@ function sitePlan() {
   const out = [];
   // контуры рельефа
   for (let i = 0; i < 14; i++) {
-    const y = 786 + i * 18;
+    const y = 1012 + i * 12;
     const pts = [];
     for (let x = 120; x <= 1560; x += 60) pts.push(`${x} ${P(y + Math.sin((x + i * 40) / 120) * 7)}`);
     out.push(`<path d="M${pts.join(" L")}" fill="none" stroke="var(--line-grid-decor)" stroke-width="0.8"/>`);
@@ -231,19 +231,19 @@ function sitePlan() {
   // деревья
   const trees = [];
   for (let i = 0; i < 70; i++) {
-    const x = 130 + ((i * 137) % 1400), y = 786 + ((i * 73) % 120);
+    const x = 130 + ((i * 137) % 1400), y = 1016 + ((i * 73) % 84);
     trees.push(`M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0 -8 0M${x} ${y - 4}v-6`);
   }
   out.push(`<path d="${trees.join(" ")}" fill="none" stroke="var(--fg-secondary)" stroke-width="0.8"/>`);
   // соседние здания
-  out.push(`<path d="M120 902 L300 902 L300 962 L120 962 Z" fill="none" stroke="var(--line-structural)" stroke-width="1"/>`);
-  out.push(`<path d="M1180 902 L1340 902 L1340 968 L1180 968 Z" fill="none" stroke="var(--line-structural)" stroke-width="1"/>`);
+  out.push(`<path d="M120 1006 L300 1006 L300 1076 L120 1076 Z" fill="none" stroke="var(--line-structural)" stroke-width="1"/>`);
+  out.push(`<path d="M1180 1008 L1340 1008 L1340 1078 L1180 1078 Z" fill="none" stroke="var(--line-structural)" stroke-width="1"/>`);
   return out.join("");
 }
 
 function buildingPlan(ru) {
   const out = [];
-  const x0 = 1128, y0 = 140, w = 380, h = 300;
+  const x0 = 1128, y0 = 120, w = 380, h = 276;
   out.push(`<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="none" stroke="var(--fg-primary)" stroke-width="1.6"/>`);
   // помещения
   for (let i = 1; i < 7; i++) out.push(`<path d="M${x0 + (w / 7) * i} ${y0} L${x0 + (w / 7) * i} ${y0 + h}" stroke="var(--line-structural)" stroke-width="0.9"/>`);
@@ -259,13 +259,13 @@ function buildingPlan(ru) {
     const a = (k * Math.PI) / 6;
     out.push(`<path d="M${P(x0 + w * 0.72 + Math.cos(a) * 52)} ${P(y0 + h * 0.62 + Math.sin(a) * 52)} L${P(x0 + w * 0.72 + Math.cos(a) * 60)} ${P(y0 + h * 0.62 + Math.sin(a) * 60)}" stroke="var(--line-structural)" stroke-width="0.7"/>`);
   }
-  out.push(`<text x="${x0 + 6}" y="${y0 - 8}" class="ax-label" fill="var(--fg-secondary)">${ru ? "ПЛАН 1:2000" : "PLAN 1:2000"}</text>`);
+  out.push(`<text x="${x0 + 6}" y="${y0 - 10}" class="ax-label" fill="var(--fg-secondary)">${ru ? "ПЛАН 1:2000" : "PLAN 1:2000"}</text>`);
   return out.join("");
 }
 
 function detailD1() {
   const out = [];
-  const x0 = 1128, y0 = 500, w = 380, h = 210;
+  const x0 = 1128, y0 = 656, w = 380, h = 196;
   out.push(`<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="none" stroke="var(--line-structural)" stroke-width="1"/>`);
   // слои оболочки 1:5
   const layers = [
@@ -287,7 +287,7 @@ function detailD1() {
 
 function detailD2() {
   const out = [];
-  const x0 = 1128, y0 = 940, w = 380, h = 120;
+  const x0 = 1128, y0 = 872, w = 380, h = 126;
   out.push(`<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="none" stroke="var(--line-structural)" stroke-width="1"/>`);
   // две накладки
   out.push(`<path d="M${x0 + 30} ${y0 + 30} L${x0 + w - 30} ${y0 + 30} L${x0 + w - 30} ${y0 + 50} L${x0 + 30} ${y0 + 50} Z" fill="none" stroke="var(--fg-primary)" stroke-width="2"/>`);
@@ -311,9 +311,9 @@ function legend(entries) {
   const rows = entries
     .map(
       (e, i) =>
-        `<g><circle cx="1136" cy="${560 + i * 26}" r="8" fill="none" stroke="var(--accent-primary)" stroke-width="1"/>` +
-        `<text x="1136" y="${564 + i * 26}" text-anchor="middle" class="ax-label" fill="var(--accent-primary)">${i + 1}</text>` +
-        `<text x="1154" y="${564 + i * 26}" class="ax-label" fill="var(--fg-secondary)">${escape(e)}</text></g>`
+        `<g><circle cx="1136" cy="${436 + i * 26}" r="8" fill="none" stroke="var(--accent-primary)" stroke-width="1"/>` +
+        `<text x="1136" y="${440 + i * 26}" text-anchor="middle" class="ax-label" fill="var(--accent-primary)">${i + 1}</text>` +
+        `<text x="1154" y="${440 + i * 26}" class="ax-label" fill="var(--fg-secondary)">${escape(e)}</text></g>`
     )
     .join("");
   return rows;
@@ -351,7 +351,7 @@ export function institute(lang) {
     ? ["РАЗМЕРЫ УСЛОВНЫЕ", "ПРОЕКЦИЯ АКСОНОМЕТРИЧЕСКАЯ", "ЛИНИИ ПО ISO 128", "БЕТОН ШТРИХУЕТСЯ ПОД 45°", "АРМИРОВАНИЕ УСЛОВНО", "УЗЛЫ СМ. Д1, Д2", "МАСШТАБ 1:1000"]
     : ["DIMENSIONS SCHEMATIC", "AXONOMETRIC PROJECTION", "LINES PER ISO 128", "CONCRETE HATCH 45°", "REBAR SCHEMATIC", "JOINTS SEE D1, D2", "SCALE 1:1000"]
   )
-    .map((t, i) => `<text x="136" y="${842 + i * 17}" class="ax-label" fill="var(--fg-secondary)">${i + 1}. ${escape(t)}</text>`)
+    .map((t, i) => `<text x="136" y="${796 + i * 16}" class="ax-label" fill="var(--fg-secondary)">${i + 1}. ${escape(t)}</text>`)
     .join("");
 
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="sheet-title" xmlns="http://www.w3.org/2000/svg">
@@ -384,8 +384,8 @@ export function institute(lang) {
   ${notes}
   ${dimChain(200, 900, 790, ["1","2","3","4","5","6","7","8"])}
   ${vDimChain(168, GY, 214, ["01","02","03","04","05","06","07","08"])}
-  <text x="1136" y="492" class="ax-label" fill="var(--fg-secondary)">${ru ? "ДЕТАЛЬ Д1 · 1:5" : "DETAIL D1 · 1:5"}</text>
-  <text x="1136" y="932" class="ax-label" fill="var(--fg-secondary)">${ru ? "УЗЕЛ Д2 · 1:2" : "JOINT D2 · 1:2"}</text>
+  <text x="1136" y="648" class="ax-label" fill="var(--fg-secondary)">${ru ? "ДЕТАЛЬ Д1 · 1:5" : "DETAIL D1 · 1:5"}</text>
+  <text x="1136" y="864" class="ax-label" fill="var(--fg-secondary)">${ru ? "УЗЕЛ Д2 · 1:2" : "JOINT D2 · 1:2"}</text>
   ${leaders}
   ${pointer}
   ${north}
@@ -393,7 +393,7 @@ export function institute(lang) {
   <path d="M700 700 L1128 620" stroke="var(--fg-secondary)" stroke-width="1" stroke-dasharray="6 4"/>
   <circle cx="700" cy="700" r="10" fill="none" stroke="var(--accent-primary)" stroke-width="1.2"/>
   <text x="714" y="704" class="ax-label" fill="var(--accent-primary)">Д1</text>
-  <text x="136" y="820" class="ax-label" fill="var(--fg-secondary)">${ru ? "ПРИМЕЧАНИЯ" : "NOTES"}</text>
+  <text x="136" y="780" class="ax-label" fill="var(--fg-secondary)">${ru ? "ПРИМЕЧАНИЯ" : "NOTES"}</text>
   <text x="206" y="782" class="ax-label" fill="var(--fg-secondary)">H1</text>
   <text x="196" y="${GY - 40}" class="ax-label" fill="var(--fg-secondary)">H2</text>
   <text x="${S.cx}" y="${S.cy + S.r + 26}" text-anchor="middle" class="ax-label" fill="var(--fg-secondary)">D1</text>
