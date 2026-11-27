@@ -80,7 +80,7 @@ export function axonometry(project, stack, opts = {}) {
     }
 
     parts.push(
-      `<g class="layer" opacity="${op}">` +
+      `<g class="layer" style="--ly:${i}" opacity="${op}">` +
         `<polygon points="${left}" fill="url(#${uid}-hatch)" stroke="var(--fg-primary)" stroke-width="1.2"/>` +
         `<polygon points="${right}" fill="var(--bg)" stroke="var(--fg-primary)" stroke-width="1.2"/>` +
         `<polygon points="${top}" fill="var(--surface)" stroke="var(--fg-primary)" stroke-width="1.6"/>` +

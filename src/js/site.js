@@ -58,7 +58,7 @@
   // Координаты указателя на главной
   function initCoords() {
     var out = document.getElementById("coords");
-    var fig = document.querySelector(".hero-figure");
+    var fig = document.querySelector(".hero-sheet");
     if (!out || !fig) return;
     var raf = 0, last = { x: 0, y: 0 };
     fig.addEventListener("pointermove", function (ev) {
@@ -100,7 +100,38 @@
     }
   }
 
+  // Координатный крест по титульному листу
+  function initCross() {
+    var sheet = document.querySelector(".hero-sheet");
+    if (!sheet) return;
+    var cx = sheet.querySelector(".cross-x"), cy = sheet.querySelector(".cross-y");
+    if (!cx || !cy) return;
+    sheet.addEventListener("pointermove", function (ev) {
+      var r = sheet.getBoundingClientRect();
+      cx.style.top = Math.round(ev.clientY - r.top) + "px";
+      cy.style.left = Math.round(ev.clientX - r.left) + "px";
+      sheet.classList.add("is-hot");
+    });
+    sheet.addEventListener("pointerleave", function () { sheet.classList.remove("is-hot"); });
+  }
+
+  // Появление блоков
+  function initReveal() {
+    var items = document.querySelectorAll(".reveal");
+    if (!items.length || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      for (var i = 0; i < items.length; i++) items[i].classList.add("is-in");
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      for (var j = 0; j < entries.length; j++) {
+        if (entries[j].isIntersecting) { entries[j].target.classList.add("is-in"); io.unobserve(entries[j].target); }
+      }
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    for (var k = 0; k < items.length; k++) io.observe(items[k]);
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { init(); initMode(); initCoords(); initGraph(); });
-  } else { init(); initMode(); initCoords(); initGraph(); }
+    document.addEventListener("DOMContentLoaded", function () { init(); initMode(); initCoords(); initGraph(); initCross(); initReveal(); });
+  } else { init(); initMode(); initCoords(); initGraph(); initCross(); initReveal(); }
 })();

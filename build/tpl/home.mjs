@@ -149,7 +149,7 @@ function institute(lang) {
     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
 </defs>
-<g filter="url(#glow)" style="color: var(--fg-primary)">
+<g class="plot" filter="url(#glow)" style="color: var(--fg-primary)">
   ${ground}
   ${plinth}
   <rect x="${towerX}" y="${towerTop}" width="${towerW}" height="${GY - 30 - towerTop}" fill="none" stroke="var(--fg-primary)" stroke-width="2"/>
@@ -192,12 +192,15 @@ export function homePage(ctx, lang) {
         ${manifest.filter(Boolean).map((m) => `<p>${escape(m)}</p>`).join("")}
       </div>
     </div>
-    <div class="hero-side">
-      <p class="dwg dwg--lg">${escape(t(site.availability))} · UTC+3</p>
-      <p class="dwg">${lang === "ru" ? "ЛИСТ 00 · ТИТУЛЬНЫЙ" : "SHEET 00 · TITLE"}</p>
-      <p class="dwg">${lang === "ru" ? "ПО ЧЕРТЕЖУ 1927 ГОДА" : "AFTER THE 1927 SHEET"}</p>
+    <div class="hero-side dwg dwg--lg">
+      <p><span>${lang === "ru" ? "ЛИСТ" : "SHEET"}</span><span>00 · ${lang === "ru" ? "ТИТУЛЬНЫЙ" : "TITLE"}</span></p>
+      <p><span>${lang === "ru" ? "ПО ЧЕРТЕЖУ" : "AFTER"}</span><span>1927</span></p>
+      <p><span>${lang === "ru" ? "ДОСТУПЕН" : "AVAILABLE"}</span><span>${escape(t(site.availability))}</span></p>
+      <p><span>UTC</span><span>+3</span></p>
     </div>
     <figure class="hero-sheet">
+      <span class="cross-x" aria-hidden="true"></span>
+      <span class="cross-y" aria-hidden="true"></span>
       ${institute(lang)}
       <figcaption class="coords">
         <span id="coords">X 0000 · Y 0000</span>
@@ -207,7 +210,7 @@ export function homePage(ctx, lang) {
   </div>
 </section>
 
-<section class="section" id="s-02">
+<section class="section reveal" id="s-02">
   <div class="section-head"><span class="num">02</span><h2>${escape(t(site.ui.work))}</h2><span class="rule"></span><span class="dwg">${projects.length} ${lang === "ru" ? "ПРОЕКТОВ" : "PROJECTS"}</span></div>
   <div class="grid">${preview}</div>
   <div class="link-row">

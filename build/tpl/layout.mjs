@@ -76,11 +76,13 @@ export function renderPage(ctx, { lang, route, title, description, body, pageKey
 <link rel="preload" href="${fontBase}/golos-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${fontBase}/unbounded-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${assetHref(route, lang, "assets/site.css")}">
+<script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">${jsonld}</script>
 </head>
 <body class="page-${attr(pageKey)}">
 <a class="skip" href="#main">${lang === "ru" ? "К содержанию" : "Skip to content"}</a>
 <div class="sheet-frame" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 <div class="sheet">
   <header class="masthead">
     <a class="brand" href="${routeHref(route, lang, "", lang)}">${lang === "ru" ? "КУХТО" : "KUKHTO"}<span class="dot">·</span>ATELIER</a>

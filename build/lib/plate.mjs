@@ -28,7 +28,7 @@ export function plateCard(ctx, project, lang, opts = {}) {
   const href = routeHref(compact ? "" : "work", lang, `work/${project.slug}`, lang);
   const openLabel = lang === "ru" ? "ОТКРЫТЬ ЧЕРТЁЖ" : "OPEN DRAWING";
 
-  return `<article class="plate">
+  return `<article class="plate reveal">
   <header class="plate-top">
     <span class="idx">${escape(project.index)}</span>
     <span>${escape(statusLabel(site, project, lang))}</span>
