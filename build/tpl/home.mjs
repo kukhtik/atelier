@@ -95,11 +95,12 @@ function institute(lang) {
     `<text x="${sph.cx}" y="584" text-anchor="middle" class="ax-label" fill="var(--fg-secondary)">D</text>`;
 
   // фигуры масштаба: у башни и у сферы
-  const fig = (x, h) => `<g stroke="var(--fg-primary)" stroke-width="1.5" fill="none" transform="translate(${x} ${GY}) scale(${(h / 26).toFixed(2)})">` +
-    `<circle cx="0" cy="-22" r="4"/><path d="M0 -18 L0 -8 M0 -8 L-4 0 M0 -8 L4 0 M-4 -14 L4 -14"/></g>`;
-  const human = fig(472, 26) + fig(700, 26) +
-    `<path d="M478 ${GY - 30} L512 ${GY - 30}" stroke="var(--line-structural)" stroke-width="1"/>` +
-    `<text x="516" y="${GY - 26}" class="ax-label" fill="var(--fg-secondary)">1:1000</text>`;
+  const fig = (x, h, label) => `<g transform="translate(${x} ${GY})">` +
+    `<ellipse cx="0" cy="2" rx="9" ry="2.2" fill="var(--line-structural)" opacity=".8"/>` +
+    `<g stroke="var(--fg-primary)" stroke-width="2" fill="none" transform="scale(${(h / 30).toFixed(2)})">` +
+    `<circle cx="0" cy="-26" r="4.4"/><path d="M0 -21 L0 -9 M0 -9 L-5 0 M0 -9 L5 0 M-5 -16 L5 -16"/></g>` +
+    `<text x="10" y="-4" class="ax-label" fill="var(--fg-secondary)">${label}</text></g>`;
+  const human = fig(470, 34, "1:1000") + fig(636, 30, "");
 
   // выноски
   const labels = leader(towerX - 6, 330, 200, 330) + leader(sph.cx + 110, 430, 1030, 470) + leader(792, 196, 726, 132) +
@@ -200,7 +201,7 @@ export function homePage(ctx, lang) {
       ${institute(lang)}
       <figcaption class="coords">
         <span id="coords">X 0000 · Y 0000</span>
-        <span>${lang === "ru" ? "ИНСТИТУТ БИБЛИОТЕКОВЕДЕНИЯ · И. ЛЕОНИДОВ · 1927" : "LENIN INSTITUTE · I. LEONIDOV · 1927"}</span>
+        <span>${lang === "ru" ? "ИНСТИТУТ БИБЛИОТЕКОВЕДЕНИЯ · И. ЛЕОНИДОВ · 1927 · РАЗМЕРЫ УСЛОВНЫЕ" : "LENIN INSTITUTE · I. LEONIDOV · 1927 · DIMENSIONS SCHEMATIC"}</span>
       </figcaption>
     </figure>
   </div>

@@ -17,7 +17,7 @@ function label(site, key, lang) {
   return v ? v[lang] || v.ru : key;
 }
 
-export function renderPage(ctx, { lang, route, title, description, body, pageKey }) {
+export function renderPage(ctx, { lang, route, title, description, body, pageKey, scale }) {
   const { site, hash } = ctx;
   const t = (v) => (v && typeof v === "object" ? v[lang] || v.ru : v || "");
   const canonical = SITE + pageFile(route, lang).replace("index.html", "");
@@ -93,7 +93,7 @@ export function renderPage(ctx, { lang, route, title, description, body, pageKey
 ${body}
   </main>
   <footer class="titleblock" aria-label="${lang === "ru" ? "Штамп чертежа" : "Title block"}">
-    <div class="tb-head"><span>${lang === "ru" ? "ШТАМП" : "TITLE BLOCK"}</span><span>${escape(t(site.ui.scale))}</span></div>
+    <div class="tb-head"><span>${lang === "ru" ? "ШТАМП" : "TITLE BLOCK"}</span><span>${escape(scale || t(site.ui.scale))}</span></div>
     <dl>
       <div class="row"><span>${escape(t(site.ui.medium))}</span><b data-medium-name>VOID</b></div>
       <div class="row"><span>${escape(t(site.ui.sheet))}</span><b>01</b></div>

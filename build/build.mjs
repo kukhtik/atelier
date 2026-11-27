@@ -44,6 +44,7 @@ for (const lang of ["ru", "en"]) {
     route: "",
     file: pageFile("", lang),
     pageKey: "home",
+    scale: "МАСШТАБ 1:1000",
     title: (site.seo?.title?.[lang]) || `${site.name[lang]} — ${site.role[lang]}`,
     description: (site.seo?.description?.[lang]) || site.hero?.lead?.[lang] || "",
     body: homePage(ctx, lang),
