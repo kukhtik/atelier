@@ -77,20 +77,22 @@ function towerElevation() {
       out.push(`<path d="M${T.x1} ${P(y + fh - 6)} L${T.x2} ${P(y + fh - 6)}" stroke="var(--line-structural)" stroke-width="0.8"/>`);
     }
   }
-  for (let x = T.x1 + 6; x < T.x2; x += 6) {
-    out.push(`<path d="M${P(x)} ${T.top + 4} L${P(x)} ${GY - 4}" stroke="var(--line-structural)" stroke-width="0.6" stroke-opacity=".8"/>`);
-  }
+  const mull = [];
+  for (let x = T.x1 + 6; x < T.x2; x += 6) mull.push(`M${P(x)} ${T.top + 4}L${P(x)} ${GY - 4}`);
+  out.push(`<path d="${mull.join(" ")}" stroke="var(--line-structural)" stroke-width="0.6" stroke-opacity=".8" fill="none"/>`);
   // фрамуги и полки книгохранилища
   for (let f = 0; f < T.floors; f++) {
     const y = T.top + f * fh;
     out.push(`<path d="M${T.x1 + 3} ${P(y + fh * 0.45)} L${T.x2 - 3} ${P(y + fh * 0.45)}" stroke="var(--line-grid-decor)" stroke-width="0.6"/>`);
-    for (let x = T.x1 + 8; x < T.x2 - 8; x += 13) {
-      out.push(`<path d="M${P(x)} ${P(y + 8)} l0 ${P(fh - 18)}" stroke="var(--line-grid-decor)" stroke-width="0.5"/>`);
-    }
+    const shelf = [];
+    for (let x = T.x1 + 8; x < T.x2 - 8; x += 13) shelf.push(`M${P(x)} ${P(y + 8)}v${P(fh - 18)}`);
+    out.push(`<path d="${shelf.join(" ")}" stroke="var(--line-grid-decor)" stroke-width="0.5" fill="none"/>`);
   }
   for (let f = 0; f < T.floors; f++) {
     const y = T.top + f * fh + fh - 12;
-    for (let x = T.x1 + 4; x < T.x2 - 4; x += 7) out.push(`<path d="M${P(x)} ${P(y)} l0 -6" stroke="var(--line-grid-decor)" stroke-width="0.5"/>`);
+    const rail = [];
+    for (let x = T.x1 + 4; x < T.x2 - 4; x += 7) rail.push(`M${P(x)} ${P(y)}v-6`);
+    out.push(`<path d="${rail.join(" ")}" stroke="var(--line-grid-decor)" stroke-width="0.5" fill="none"/>`);
     out.push(`<path d="M${T.x1 + 4} ${P(y - 6)} L${T.x2 - 4} ${P(y - 6)}" stroke="var(--line-structural)" stroke-width="0.7"/>`);
   }
 
@@ -155,11 +157,13 @@ function sphereElevation() {
     const rr = 26 + ring * 14;
     out.push(`<ellipse cx="${S.cx}" cy="${S.cy + 40}" rx="${rr}" ry="${P(rr * 0.34)}" fill="none" stroke="var(--line-structural)" stroke-width="0.8"/>`);
     const seats = 10 + ring * 4;
+    const seatPath = [];
     for (let s = 0; s < seats; s++) {
       const a = Math.PI + (s / (seats - 1)) * Math.PI;
       const x = S.cx + Math.cos(a) * rr, y = S.cy + 40 + Math.sin(a) * rr * 0.34;
-      out.push(`<path d="M${P(x)} ${P(y)} l0 4" stroke="var(--fg-secondary)" stroke-width="1"/>`);
+      seatPath.push(`M${P(x)} ${P(y)}v4`);
     }
+    out.push(`<path d="${seatPath.join(" ")}" stroke="var(--fg-secondary)" stroke-width="1" fill="none"/>`);
   }
   // постамент и вход
   out.push(`<path d="M${S.cx - 52} ${S.cy + S.r - 8} L${S.cx + 52} ${S.cy + S.r - 8} L${S.cx + 34} ${GY} L${S.cx - 34} ${GY} Z" fill="none" stroke="var(--fg-primary)" stroke-width="2"/>`);
@@ -198,13 +202,16 @@ function section() {
     }
   }
   // стержни арматуры по контуру
+  const bars = [];
   for (let a = -60; a <= 60; a += 6) {
     const rad = (a * Math.PI) / 180;
-    out.push(`<circle cx="${P(cx + Math.sin(rad) * (r - 12))}" cy="${P(cy - Math.cos(rad) * (r - 12))}" r="1.4" fill="var(--fg-secondary)"/>`);
+    const bx = cx + Math.sin(rad) * (r - 12), by = cy - Math.cos(rad) * (r - 12);
+    bars.push(`M${P(bx - 3)} ${P(by)}a3 3 0 1 0 6 0a3 3 0 1 0 -6 0`);
   }
   for (let y = cy + 20; y < GY; y += 18) {
-    out.push(`<circle cx="${cx - r + 13}" cy="${y}" r="1.4" fill="var(--fg-secondary)"/><circle cx="${cx + r - 13}" cy="${y}" r="1.4" fill="var(--fg-secondary)"/>`);
+    bars.push(`M${P(cx - r + 10)} ${P(y)}a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M${P(cx + r - 16)} ${P(y)}a3 3 0 1 0 6 0a3 3 0 1 0 -6 0`);
   }
+  out.push(`<path d="${bars.join(" ")}" fill="var(--fg-secondary)"/>`);
 
   // шахта лифта в разрезе
   out.push(`<rect x="${cx - 14}" y="${cy - r + 20}" width="28" height="${GY - cy + r - 20}" fill="none" stroke="var(--fg-secondary)" stroke-width="1"/>`);
@@ -222,10 +229,12 @@ function sitePlan() {
     out.push(`<path d="M${pts.join(" L")}" fill="none" stroke="var(--line-grid-decor)" stroke-width="0.8"/>`);
   }
   // деревья
+  const trees = [];
   for (let i = 0; i < 70; i++) {
     const x = 130 + ((i * 137) % 1400), y = 786 + ((i * 73) % 120);
-    out.push(`<circle cx="${x}" cy="${y}" r="4" fill="none" stroke="var(--fg-secondary)" stroke-width="0.8"/><path d="M${x} ${y - 4} l0 -6" stroke="var(--fg-secondary)" stroke-width="0.8"/>`);
+    trees.push(`M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0 -8 0M${x} ${y - 4}v-6`);
   }
+  out.push(`<path d="${trees.join(" ")}" fill="none" stroke="var(--fg-secondary)" stroke-width="0.8"/>`);
   // соседние здания
   out.push(`<path d="M120 902 L300 902 L300 962 L120 962 Z" fill="none" stroke="var(--line-structural)" stroke-width="1"/>`);
   out.push(`<path d="M1180 902 L1340 902 L1340 968 L1180 968 Z" fill="none" stroke="var(--line-structural)" stroke-width="1"/>`);
